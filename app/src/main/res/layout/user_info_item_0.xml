@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:background="@color/main_bg">
+
+    <ImageView
+        android:id="@+id/user_info_sign_item_bg"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/wait_dialog_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/user_info_item_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="46dp"
+        android:background="@mipmap/qianming_icon"
+        app:layout_constraintBottom_toBottomOf="@id/user_info_sign_item_bg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/user_info_sign_item_bg"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="22dp"
+        android:background="@mipmap/jinru_icon"
+        app:layout_constraintBottom_toBottomOf="@id/user_info_sign_item_bg"
+        app:layout_constraintTop_toTopOf="@id/user_info_sign_item_bg"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        app:layout_constraintLeft_toRightOf="@id/user_info_item_iv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_weight="1"
+        android:text="上传签名"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/text_size_16"
+        app:layout_constraintBottom_toBottomOf="@id/user_info_sign_item_bg"
+        app:layout_constraintTop_toTopOf="@id/user_info_sign_item_bg"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

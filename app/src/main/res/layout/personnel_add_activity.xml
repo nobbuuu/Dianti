@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_bg"
+        android:orientation="vertical">
+
+    <com.base.baselib.view.TitleView
+            android:id="@+id/personnel_add_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentInsetStart="0dp"
+            app:layout_collapseMode="pin"
+            app:showRight="true"
+            app:textRight="提交"
+            app:textTitle="新增人员"
+            tools:ignore="MissingConstraints" />
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/personnel_add_title">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:ignore="ScrollViewSize">
+
+
+            <EditText
+                    android:id="@+id/personnel_add_phone_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/user_input_bg"
+                    android:hint="输入手机号"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:padding="12dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_16"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+            <EditText
+                    android:id="@+id/personnel_add_name_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/user_input_bg"
+                    android:hint="输入身份证姓名"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:padding="12dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_16"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_add_phone_et"
+                    tools:ignore="MissingConstraints" />
+
+
+            <EditText
+                    android:id="@+id/personnel_add_card_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/user_input_bg"
+                    android:hint="输入身份证号"
+                    android:maxLength="18"
+                    android:maxLines="1"
+                    android:padding="12dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_16"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_add_name_et"
+                    tools:ignore="MissingConstraints" />
+
+            <TextView
+                    android:id="@+id/personnel_card_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="上传身份证姓名面照片"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_14"
+                    app:layout_constraintLeft_toLeftOf="@id/personnel_add_card_et"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_add_card_et"
+                    tools:ignore="MissingConstraints" />
+
+
+            <ImageView
+                    android:id="@+id/personnel_card_iv"
+                    android:layout_width="200dp"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="12dp"
+                    android:scaleType="fitXY"
+                    android:background="@drawable/error_image"
+                    app:layout_constraintLeft_toLeftOf="@id/personnel_card_tag"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_card_tag"
+                    tools:ignore="MissingConstraints" />
+
+            <TextView
+                    android:id="@+id/personnel_card_add_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:text="＋"
+                    android:textColor="@color/text_9_color"
+                    android:textSize="40dp"
+                    app:layout_constraintBottom_toBottomOf="@id/personnel_card_iv"
+                    app:layout_constraintLeft_toRightOf="@id/personnel_card_iv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/personnel_card_iv"
+                    tools:ignore="MissingConstraints" />
+
+
+            <TextView
+                    android:id="@+id/personnel_card_1_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="上传身份证国徽面照片"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_14"
+                    app:layout_constraintLeft_toLeftOf="@id/personnel_card_iv"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_card_iv"
+                    tools:ignore="MissingConstraints" />
+
+
+            <ImageView
+                    android:id="@+id/personnel_card_1_iv"
+                    android:layout_width="200dp"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="12dp"
+                    android:scaleType="fitXY"
+                    android:background="@drawable/error_image"
+                    app:layout_constraintLeft_toLeftOf="@id/personnel_card_1_tag"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_card_1_tag"
+                    tools:ignore="MissingConstraints" />
+
+            <TextView
+                    android:id="@+id/personnel_card_add_1_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:text="＋"
+                    android:textColor="@color/text_9_color"
+                    android:textSize="40dp"
+                    app:layout_constraintBottom_toBottomOf="@id/personnel_card_1_iv"
+                    app:layout_constraintLeft_toRightOf="@id/personnel_card_1_iv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/personnel_card_1_iv"
+                    tools:ignore="MissingConstraints" />
+
+
+            <EditText
+                    android:id="@+id/personnel_work_card_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/user_input_bg"
+                    android:hint="输入工作证号"
+                    android:maxLength="18"
+                    android:maxLines="1"
+                    android:padding="12dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_16"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_card_1_iv"
+                    tools:ignore="MissingConstraints" />
+
+
+            <TextView
+                    android:id="@+id/personnel_work_card_0_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="上传证件姓名面照片"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_14"
+                    app:layout_constraintLeft_toLeftOf="@id/personnel_work_card_et"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_work_card_et"
+                    tools:ignore="MissingConstraints" />
+
+
+            <ImageView
+                    android:id="@+id/personnel_work_card_0_iv"
+                    android:layout_width="200dp"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="12dp"
+                    android:scaleType="fitXY"
+                    android:background="@drawable/error_image"
+                    app:layout_constraintLeft_toLeftOf="@id/personnel_work_card_0_tag"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_work_card_0_tag"
+                    tools:ignore="MissingConstraints" />
+
+            <TextView
+                    android:id="@+id/personnel_work_card_add_0_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:text="＋"
+                    android:textColor="@color/text_9_color"
+                    android:textSize="40dp"
+                    app:layout_constraintBottom_toBottomOf="@id/personnel_work_card_0_iv"
+                    app:layout_constraintLeft_toRightOf="@id/personnel_work_card_0_iv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/personnel_work_card_0_iv"
+                    tools:ignore="MissingConstraints" />
+
+
+            <TextView
+                    android:id="@+id/personnel_work_card_1_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="上传证件反面照片"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_14"
+                    app:layout_constraintLeft_toLeftOf="@id/personnel_work_card_0_iv"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_work_card_0_iv"
+                    tools:ignore="MissingConstraints" />
+
+
+            <ImageView
+                    android:id="@+id/personnel_work_card_1_iv"
+                    android:layout_width="200dp"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="12dp"
+                    android:scaleType="fitXY"
+                    android:background="@drawable/error_image"
+                    app:layout_constraintLeft_toLeftOf="@id/personnel_work_card_1_tag"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_work_card_1_tag"
+                    tools:ignore="MissingConstraints" />
+
+            <TextView
+                    android:id="@+id/personnel_work_card_add_1_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:text="＋"
+                    android:textColor="@color/text_9_color"
+                    android:textSize="40dp"
+                    app:layout_constraintBottom_toBottomOf="@id/personnel_work_card_1_iv"
+                    app:layout_constraintLeft_toRightOf="@id/personnel_work_card_1_iv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/personnel_work_card_1_iv"
+                    tools:ignore="MissingConstraints" />
+
+
+            <TextView
+                    android:id="@+id/personnel_work_card_2_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="上传手持身份证与执法证件照片"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_14"
+                    app:layout_constraintLeft_toLeftOf="@id/personnel_work_card_1_iv"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_work_card_1_iv"
+                    tools:ignore="MissingConstraints" />
+
+
+            <ImageView
+                    android:id="@+id/personnel_work_card_2_iv"
+                    android:layout_width="200dp"
+                    android:layout_height="160dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/error_image"
+                    app:layout_constraintLeft_toLeftOf="@id/personnel_work_card_2_tag"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_work_card_2_tag"
+                    tools:ignore="MissingConstraints" />
+
+            <TextView
+                    android:id="@+id/personnel_work_card_add_2_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:text="＋"
+                    android:textColor="@color/text_9_color"
+                    android:textSize="40dp"
+                    app:layout_constraintBottom_toBottomOf="@id/personnel_work_card_2_iv"
+                    app:layout_constraintLeft_toRightOf="@id/personnel_work_card_2_iv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/personnel_work_card_2_iv"
+                    tools:ignore="MissingConstraints" />
+
+            <TextView
+                    android:id="@+id/personnel_note_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="注意事项"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_16"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="@id/personnel_work_card_2_iv"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_work_card_2_iv"
+                    tools:ignore="MissingConstraints" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="照片、文字清晰可辨"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/personnel_work_card_2_iv"
+                    app:layout_constraintTop_toBottomOf="@id/personnel_note_tv"
+                    tools:ignore="MissingConstraints" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.androidThis.compileSdkVersion
+    buildToolsVersion rootProject.ext.androidThis.buildToolsVersion
+    defaultConfig {
+        applicationId "com.qt.dtzf"
+        minSdkVersion rootProject.ext.androidThis.minSdkVersion
+        targetSdkVersion rootProject.ext.androidThis.targetSdkVersion
+        versionCode rootProject.ext.androidThis.versionCodeParent
+
+        versionName rootProject.ext.androidThis.versionNameParent
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        debug {
+            /*keyAlias 'elevator'
+            keyPassword 'dt20200512'
+            storeFile file('E:/code/Mode_Student/Android_BaseSDK/key/elevator.jks')
+            storePassword 'dt20200512'*/
+        }
+        release {
+            keyAlias 'elevator'
+            keyPassword 'dt20200512'
+            storeFile file('E:/code/Mode_Student/Android_BaseSDK/key/elevator.jks')
+            storePassword 'dt20200512'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(path: ':BaseLib')
+
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+    implementation 'com.teprinciple:updateapputilsX:2.0.2'
+}

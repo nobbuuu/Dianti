@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@mipmap/gezx_icon_gray" android:state_checked="false" />
+    <item android:drawable="@mipmap/grzx_icon_light" android:state_enabled="true" />
+</selector>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleView">
+        <!--设置标题-->
+        <attr name="textTitle" format="string" />
+        <!--设置下拉箭头样式-->
+        <attr name="iconTitle" format="reference" />
+        <!--显示下拉箭头-->
+        <attr name="showIconTitle" format="boolean" />
+        <!--显示左边内容-->
+        <attr name="showLeft" format="boolean" />
+        <!--显示右边边内容-->
+        <attr name="showRight" format="boolean" />
+        <!--设置右边的图标-->
+        <attr name="iconRight" format="reference" />
+        <!--设置右边的文字-->
+        <attr name="textRight" format="string" />
+        <!--显示其他-->
+        <attr name="showOther" format="boolean" />
+        <!--显示其他界面id-->
+        <attr name="showOtherID" format="reference" />
+    </declare-styleable>
+</resources>

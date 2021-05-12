@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/main_bg"
+    android:gravity="center"
+    android:padding="4dp">
+
+    <FrameLayout
+        android:id="@+id/home_item_1_fl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/wait_dialog_bg"
+        android:paddingBottom="28dp"
+        android:paddingTop="28dp">
+        <include layout="@layout/home_item_content" />
+    </FrameLayout>
+
+
+</RelativeLayout>

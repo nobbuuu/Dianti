@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:background="@color/main_bg"
+        android:layout_height="match_parent">
+
+    <com.base.baselib.view.TitleView
+            android:id="@+id/dev_manager_list_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentInsetStart="0dp"
+            app:layout_collapseMode="pin"
+            app:textTitle="电梯使用单位"
+            tools:ignore="MissingConstraints" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/dev_manager_list_sl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dev_manager_list_title"
+            tools:ignore="MissingConstraints">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dev_manager_list_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+    <include
+            layout="@layout/error_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dev_manager_list_title" />
+</androidx.constraintlayout.widget.ConstraintLayout>

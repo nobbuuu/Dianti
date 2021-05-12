@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/wait_dialog_bg">
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/choice_elevator_top_live"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/main_bg"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/choice_elevator_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginLeft="12dp"
+            android:gravity="center"
+            android:text="电梯总数量:"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintBottom_toTopOf="@id/choice_elevator_live"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/choice_elevator_top_live"
+            tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/choice_elevator_number_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginLeft="12dp"
+            android:gravity="center"
+            android:text="20"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintBottom_toTopOf="@id/choice_elevator_live"
+            app:layout_constraintLeft_toRightOf="@id/choice_elevator_title_tv"
+            app:layout_constraintTop_toBottomOf="@id/choice_elevator_top_live"
+            tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginLeft="12dp"
+            android:gravity="center"
+            android:text="(可多选)"
+            android:textColor="@color/text_9_color"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintBottom_toTopOf="@id/choice_elevator_live"
+            app:layout_constraintLeft_toRightOf="@id/choice_elevator_number_tv"
+            app:layout_constraintTop_toBottomOf="@id/choice_elevator_top_live"
+            tools:ignore="MissingConstraints" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/choice_elevator_live"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/main_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

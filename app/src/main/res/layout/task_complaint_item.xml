@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_bg">
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/task_complaint_cv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="12dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/task_complaint_time_iv"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@mipmap/time_icon"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="12dp"
+
+                    app:layout_constraintTop_toTopOf="@id/task_complaint_time_tag"
+                    tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/task_complaint_time_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
+
+                    android:text="投诉时间:"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_14"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/task_complaint_time_iv"
+                    tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/task_complaint_time_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:maxLines="2"
+                    android:text="星期二 2020-04-21 12 : 24 "
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_14"
+                    app:layout_constraintTop_toTopOf="@id/task_complaint_time_tag"
+                    app:layout_constraintLeft_toRightOf="@id/task_complaint_time_tag"
+                    app:layout_constraintRight_toRightOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/task_item_address_iv"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@mipmap/address_icon"
+                    app:layout_constraintLeft_toLeftOf="@id/task_complaint_time_iv"
+
+                    app:layout_constraintTop_toTopOf="@id/task_complaint_address_tag"
+                    tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/task_complaint_address_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:text="投诉地点:"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_14"
+                    app:layout_constraintLeft_toRightOf="@id/task_item_address_iv"
+                    app:layout_constraintTop_toTopOf="@id/task_complaint_address_tv"
+                    tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/task_complaint_address_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="20dp"
+                    android:maxLines="2"
+                    android:text="ssdsdzasdsa sdasdsd  dasd  dsada sda sd a"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_14"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/task_complaint_time_tv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/task_complaint_time_tv"
+                    tools:ignore="MissingConstraints" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

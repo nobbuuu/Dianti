@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_bg"
+        android:orientation="vertical">
+
+    <com.base.baselib.view.TitleView
+            android:id="@+id/safe_task_details_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:contentInsetStart="0dp"
+            app:layout_collapseMode="pin"
+            app:textTitle="执行任务"
+            tools:ignore="MissingConstraints" />
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/safe_task_details_rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/safe_task_details_ll"
+            app:layout_constraintTop_toBottomOf="@id/safe_task_details_title" />
+
+    <LinearLayout
+            android:id="@+id/safe_task_details_ll"
+            android:layout_width="match_parent"
+            android:layout_height="74dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="12dp"
+            android:paddingTop="4dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/safe_task_details_describe_btn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/main_frame_btn_bg"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="问题描述"
+                android:textColor="@color/main_button_bg"
+                android:textSize="@dimen/text_size_16" />
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/safe_task_details_confirm_btn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/main_btn_bg"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="确认无误"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

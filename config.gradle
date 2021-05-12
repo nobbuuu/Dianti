@@ -1,0 +1,61 @@
+ext {
+    androidThis = [
+            compileSdkVersion: 29,
+            minSdkVersion    : 22,
+            targetSdkVersion : 29,
+            buildToolsVersion: "29.0.2",
+            versionCodeParent: 20210423,
+            versionNameParent: "1.1.0"
+    ]
+
+    depsVersion = [
+            retrofit2version  : '2.7.1',
+            okhttp3version    : '4.4.0',
+            rxjavaversion     : '2.2.2',
+            rxandroidversion  : '2.1.0',
+            rxlifecycleversion: '3.1.0',
+            glideversion      : '4.11.0'
+    ]
+    deps = [
+
+            //okhttp3官方给的拦截器，版本号必须对应
+            logging_interceptor: "com.squareup.okhttp3:logging-interceptor:${depsVersion.okhttp3version}",
+            okhttp3            : "com.squareup.okhttp3:okhttp:${depsVersion.okhttp3version}",
+            // retrofit
+            //版本号必须对应
+            retrofit2          : "com.squareup.retrofit2:retrofit:${depsVersion.retrofit2version}",
+            retrofit2_gson     : "com.squareup.retrofit2:converter-gson:${depsVersion.retrofit2version}",
+            adapter_rxjava     : "com.squareup.retrofit2:adapter-rxjava2:${depsVersion.retrofit2version}",
+            gson               : "com.google.code.gson:gson:2.8.6",
+            //rx系列
+            rxandroid2         : "io.reactivex.rxjava2:rxandroid:${depsVersion.rxandroidversion}",
+            rxjava2            : "io.reactivex.rxjava2:rxjava:${depsVersion.rxjavaversion}",
+
+            rxlifecycle_c      : "com.trello.rxlifecycle3:rxlifecycle-components:${depsVersion.rxlifecycleversion}",
+            rxlifecycle_n      : "com.trello.rxlifecycle3:rxlifecycle-navi:${depsVersion.rxlifecycleversion}",
+
+            greendao           : "org.greenrobot:greendao:3.3.0",
+            recyclerview       : "androidx.recyclerview:recyclerview:1.2.0-alpha02",
+            material           : "com.google.android.material:material:1.2.0-alpha06",
+            smartrefreshlayout : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-x",
+
+            glide              : "com.github.bumptech.glide:glide:${depsVersion.glideversion}",
+            glide_compiler     : "com.github.bumptech.glide:compiler:${depsVersion.glideversion}",
+            //极光系列
+            jpush              : "cn.jiguang.sdk:jpush:3.3.4",
+            jcore              : "cn.jiguang.sdk:jcore:2.1.2",
+
+            //eventbus
+            eventbus           : 'org.greenrobot:eventbus:3.2.0',
+
+            //录音
+            recorder           : 'com.github.zhaolewei:ZlwAudioRecorder:v1.07',
+            //定位
+            location           : 'com.amap.api:location:latest.integration',
+            //图片预览
+            photoview          : 'com.github.chrisbanes:PhotoView:2.3.0'
+
+
+    ]
+
+}

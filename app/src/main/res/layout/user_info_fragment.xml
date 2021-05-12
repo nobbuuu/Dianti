@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg">
+
+
+    <ImageView
+        android:id="@+id/user_info_title_bg"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@mipmap/head_bg_img"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/user_head_iv"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="46dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/head_image"
+        app:layout_constraintBottom_toBottomOf="@id/user_info_title_bg"
+        app:layout_constraintLeft_toLeftOf="@id/user_info_title_bg"
+        app:layout_constraintTop_toTopOf="@id/user_info_title_bg"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/user_info_phone_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="电话"
+        android:textColor="@color/user_info_phone_color"
+        android:textSize="@dimen/text_size_16"
+        app:layout_constraintLeft_toLeftOf="@id/user_info_name_tv"
+        app:layout_constraintTop_toBottomOf="@id/user_info_name_tv"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/user_tag_tv"
+        android:layout_width="54dp"
+        android:layout_height="22dp"
+        android:background="@drawable/authentication_not_bg"
+        android:gravity="center"
+        android:text="未认证"
+        android:textColor="@color/authentication_not_text_color"
+        android:textSize="@dimen/text_size_12"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/user_head_iv"
+        app:layout_constraintLeft_toRightOf="@id/user_head_iv"
+        app:layout_constraintRight_toRightOf="@id/user_head_iv"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/user_info_name_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="20dp"
+        android:maxLines="2"
+        android:text="用户名称"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_20"
+        app:layout_constraintBottom_toBottomOf="@id/user_info_title_bg"
+        app:layout_constraintLeft_toRightOf="@id/user_head_iv"
+        app:layout_constraintRight_toRightOf="@id/user_info_title_bg"
+        app:layout_constraintTop_toTopOf="@id/user_info_title_bg"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_info_title_bg"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+            <include layout="@layout/user_info_item_2" />
+
+            <include layout="@layout/user_info_item_1" />
+
+            <include layout="@layout/user_info_item_0" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/user_info_btn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="105dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/login_out_bg"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="退出登录"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_16" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/main_bg">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/personnel_files_item_cv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="12dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/personnel_files_item_iv"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:visibility="invisible"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/personnel_files_item_name_tag_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="18dp"
+                android:text="姓名 :"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@id/personnel_files_item_iv"
+                app:layout_constraintTop_toTopOf="@id/personnel_files_item_iv"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/personnel_files_item_phone_tag_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:text="电话 :"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintBottom_toBottomOf="@id/personnel_files_item_iv"
+                app:layout_constraintLeft_toRightOf="@id/personnel_files_item_iv"
+                app:layout_constraintTop_toBottomOf="@id/personnel_files_item_name_tag_tv"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/personnel_files_item_name_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:maxLines="2"
+                android:text="我的世界 我的世界"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@id/personnel_files_item_name_tag_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/personnel_files_item_name_tag_tv"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/personnel_files_item_phone_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:maxLines="2"
+                android:text="18588888888 18588888888"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@id/personnel_files_item_name_tag_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/personnel_files_item_phone_tag_tv"
+                tools:ignore="MissingConstraints" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/personnel_files_item_line"
+                app:layout_constraintTop_toBottomOf="@id/personnel_files_item_iv"
+                android:background="@color/sin_in_text_line_color"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/personnel_files_item_time_iv"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@mipmap/time_icon"
+                app:layout_constraintBottom_toBottomOf="@id/personnel_files_item_time_tag"
+                app:layout_constraintLeft_toLeftOf="@id/personnel_files_item_iv"
+                app:layout_constraintRight_toRightOf="@id/personnel_files_item_iv"
+                app:layout_constraintTop_toTopOf="@id/personnel_files_item_time_tag"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/personnel_files_item_time_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="20dp"
+                android:text="证件日期:"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@id/personnel_files_item_time_iv"
+                app:layout_constraintTop_toBottomOf="@id/personnel_files_item_line"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/personnel_files_item_time_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="12dp"
+                android:maxLines="2"
+                android:text="星期二 2020-04-21 12 : 24 "
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@id/personnel_files_item_time_tag"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/personnel_files_item_line"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/personnel_files_item_company_iv"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@mipmap/company_icon"
+                app:layout_constraintLeft_toLeftOf="@id/personnel_files_item_time_iv"
+                app:layout_constraintTop_toTopOf="@id/personnel_files_item_company_tag"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/personnel_files_item_company_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="服务公司:"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@id/personnel_files_item_company_iv"
+                app:layout_constraintTop_toTopOf="@id/personnel_files_item_company_tv"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/personnel_files_item_company_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="12dp"
+                android:maxLines="2"
+                android:text="ssdsdzasdsa sdasdsd  dasd  dsada sda sd a"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toLeftOf="@id/personnel_files_item_time_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/personnel_files_item_time_tv"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/personnel_files_item_address_iv"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="2dp"
+                android:src="@mipmap/address_icon"
+                app:layout_constraintLeft_toLeftOf="@id/personnel_files_item_time_iv"
+                app:layout_constraintTop_toTopOf="@id/personnel_files_item_address_tv"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/personnel_files_item_address_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="所属位置:"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@id/personnel_files_item_address_iv"
+                app:layout_constraintTop_toTopOf="@id/personnel_files_item_address_tv"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/personnel_files_item_address_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="20dp"
+                android:maxLines="2"
+                android:text="ssdsdzasdsa sdasdsd  dasd  dsada sda sd a"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+
+                app:layout_constraintLeft_toLeftOf="@id/personnel_files_item_company_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/personnel_files_item_company_tv"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/personnel_files_item_tag_iv"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="2dp"
+                android:src="@mipmap/tag_icon"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="@id/personnel_files_item_address_iv"
+                app:layout_constraintTop_toTopOf="@id/personnel_files_item_tag_tv"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="设备类别:"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                android:visibility="gone"
+                app:layout_constraintLeft_toRightOf="@id/personnel_files_item_tag_iv"
+                app:layout_constraintTop_toTopOf="@id/personnel_files_item_tag_tv"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/personnel_files_item_tag_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="20dp"
+                android:maxLines="4"
+                android:text="----->"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/personnel_files_item_time_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/personnel_files_item_address_tv"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/personnel_files_item_delete_btn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/main_frame_btn_bg"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="删除"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/personnel_files_item_btn"
+                app:layout_constraintTop_toBottomOf="@id/personnel_files_item_address_tv"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/personnel_files_item_btn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/main_btn_bg"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="资料详情"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/personnel_files_item_address_tv"
+                tools:ignore="MissingConstraints" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

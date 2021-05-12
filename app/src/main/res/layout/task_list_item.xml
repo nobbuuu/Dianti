@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/main_bg">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/task_item_cv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="12dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/task_item_iv"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:src="@mipmap/timg"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/task_item_name_tag_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="18dp"
+                android:text="监管人 :"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@id/task_item_iv"
+                app:layout_constraintTop_toTopOf="@id/task_item_iv"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/task_item_phone_tag_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:text="电话 :"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintBottom_toBottomOf="@id/task_item_iv"
+                app:layout_constraintLeft_toRightOf="@id/task_item_iv"
+                app:layout_constraintTop_toBottomOf="@id/task_item_name_tag_tv"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/task_item_name_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:maxLines="2"
+                android:text="我的世界 我的世界"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@id/task_item_name_tag_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/task_item_name_tag_tv"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/task_item_phone_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:maxLines="2"
+                android:text="18588888888 18588888888"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@id/task_item_name_tag_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/task_item_phone_tag_tv"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/task_item_time_iv"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@mipmap/time_icon"
+                app:layout_constraintBottom_toBottomOf="@id/task_item_time_tag"
+                app:layout_constraintLeft_toLeftOf="@id/task_item_iv"
+                app:layout_constraintRight_toRightOf="@id/task_item_iv"
+                app:layout_constraintTop_toTopOf="@id/task_item_time_tag"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/task_item_time_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="20dp"
+                android:text="下发时间:"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@id/task_item_time_iv"
+                app:layout_constraintTop_toBottomOf="@id/task_item_iv"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/task_item_time_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="12dp"
+                android:maxLines="2"
+                android:text="星期二 2020-04-21 12 : 24 "
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@id/task_item_time_tag"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/task_item_iv"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/task_item_company_iv"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@mipmap/company_icon"
+                app:layout_constraintLeft_toLeftOf="@id/task_item_time_iv"
+                app:layout_constraintTop_toTopOf="@id/task_item_company_tag"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/task_item_company_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="使用单位:"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@id/task_item_company_iv"
+                app:layout_constraintTop_toTopOf="@id/task_item_company_tv"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/task_item_company_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="12dp"
+                android:maxLines="2"
+                android:text="ssdsdzasdsa sdasdsd  dasd  dsada sda sd a"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toLeftOf="@id/task_item_time_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/task_item_time_tv"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/task_item_address_iv"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="2dp"
+                android:src="@mipmap/address_icon"
+                app:layout_constraintLeft_toLeftOf="@id/task_item_time_iv"
+                app:layout_constraintTop_toTopOf="@id/task_item_address_tv"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/task_item_address_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="任务位置:"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@id/task_item_address_iv"
+                app:layout_constraintTop_toTopOf="@id/task_item_address_tv"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/task_item_address_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="20dp"
+                android:maxLines="2"
+                android:text="ssdsdzasdsa sdasdsd  dasd  dsada sda sd a"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/task_item_company_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/task_item_company_tv"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/task_item_tag_iv"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="2dp"
+                android:src="@mipmap/tag_icon"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="@id/task_item_address_iv"
+                app:layout_constraintTop_toTopOf="@id/task_item_tag_tv"
+                tools:ignore="MissingConstraints" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="设备类别:"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                android:visibility="gone"
+                app:layout_constraintLeft_toRightOf="@id/task_item_tag_iv"
+                app:layout_constraintTop_toTopOf="@id/task_item_tag_tv"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/task_item_tag_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="20dp"
+                android:maxLines="4"
+                android:text="----->"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/task_item_time_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/task_item_address_tv"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/taskstatus_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:text="待签到"
+                android:textSize="@dimen/text_size_12"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/white"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="4dp"
+                android:background="@color/task_text_color"
+                android:layout_height="wrap_content"></androidx.appcompat.widget.AppCompatTextView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tasktype_tv"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/taskstatus_tv"
+                android:layout_width="wrap_content"
+                android:text="特种任务"
+                android:textSize="@dimen/text_size_12"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/white"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="4dp"
+                android:background="@color/task_text_color"
+                android:layout_height="wrap_content"></androidx.appcompat.widget.AppCompatTextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <com.base.baselib.view.TitleView
+            android:id="@+id/task_list_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentInsetStart="0dp"
+            app:layout_collapseMode="pin"
+            app:textTitle="任务列表"
+            tools:ignore="MissingConstraints" />
+
+
+    <com.google.android.material.tabs.TabLayout
+            android:id="@+id/task_list_tl"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/task_list_title"
+            app:tabIndicatorColor="@color/text_color"
+            app:tabIndicatorHeight="2dp"
+            app:tabSelectedTextColor="@color/text_color"
+            app:tabTextColor="@color/text_color"
+            tools:ignore="MissingConstraints" />
+
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/task_list_vp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/task_list_tl"
+            tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>

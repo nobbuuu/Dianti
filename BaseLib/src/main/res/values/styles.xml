@@ -1,0 +1,42 @@
+<resources>
+<!--    <style name="pop_top_animation" parent="android:Animation">-->
+<!--        <item name="android:windowEnterAnimation">@anim/pop_top_in</item>-->
+<!--        <item name="android:windowExitAnimation">@anim/pop_top_gone</item>-->
+<!--    </style>-->
+
+    <style name="Button" parent="Theme.AppCompat">
+        //点击颜色
+        <item name="colorControlHighlight">@color/red</item>
+        //背景颜色
+        <item name="colorButtonNormal">@color/white</item>
+    </style>
+
+
+    <style name="DialogFullScreen" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+    </style>
+
+    <!--没有选中的样式-->
+    <style name="bottom_normal_text">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+    <!--选中的样式-->
+    <style name="bottom_selected_text">
+        <item name="android:textColor">@color/main_button_bg</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+
+    <style name="AppSwitchTheme">
+        <item name="colorControlActivated">@color/main_button_bg</item>
+        <item name="colorSwitchThumbNormal">#FFF1F1F1</item>
+        <item name="android:colorForeground">@color/main_button_bg</item>
+    </style>
+
+</resources>

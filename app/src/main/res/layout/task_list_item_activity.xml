@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+    <com.base.baselib.view.TitleView
+        android:id="@+id/task_list_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentInsetStart="0dp"
+        app:layout_collapseMode="pin"
+        app:textTitle="任务确认"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/task_list_item_title"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/wait_dialog_bg"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/sampling_task_title_bg"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="@drawable/main_btn_bg"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/sampling_task_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="36dp"
+                android:layout_marginTop="18dp"
+                android:text="检查人员"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/sampling_task_head_l_im"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/head_image"
+                app:layout_constraintLeft_toLeftOf="@id/sampling_task_tv"
+                app:layout_constraintTop_toBottomOf="@id/sampling_task_tv" />
+
+            <ImageView
+                android:id="@+id/sampling_task_head_r_im"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/head_image"
+                app:layout_constraintBottom_toBottomOf="@id/sampling_task_head_l_im"
+                app:layout_constraintLeft_toLeftOf="@id/sampling_task_head_l_im" />
+
+            <TextView
+                android:id="@+id/sampling_task_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:text="名称"
+                android:textColor="@color/task_text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintBottom_toBottomOf="@id/sampling_task_head_r_im"
+                app:layout_constraintLeft_toRightOf="@id/sampling_task_head_r_im"
+                app:layout_constraintTop_toTopOf="@id/sampling_task_head_r_im" />
+
+
+            <ImageView
+                android:id="@+id/sampling_task_time_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="24dp"
+                android:src="@mipmap/time_icon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sampling_task_title_bg" />
+
+            <TextView
+                android:id="@+id/sampling_task_day_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="2020-05-11"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintBottom_toBottomOf="@id/sampling_task_time_iv"
+                app:layout_constraintLeft_toRightOf="@id/sampling_task_time_iv"
+                app:layout_constraintTop_toTopOf="@id/sampling_task_time_iv" />
+
+            <ImageView
+                android:id="@+id/sampling_task_address_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="2dp"
+                android:src="@mipmap/address_icon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/sampling_task_address_tv" />
+
+
+            <TextView
+                android:id="@+id/sampling_task_address_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="地址"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/sampling_task_day_tv"
+                app:layout_constraintRight_toRightOf="@id/sampling_task_title_bg"
+                app:layout_constraintTop_toBottomOf="@id/sampling_task_day_tv" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:text="电梯数量:" />
+
+            <TextView
+                android:id="@+id/sampling_task_number_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30台" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/sampling_task_dev_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="使用单位:"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/sampling_task_dev_tv"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/sampling_task_dev_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="16dp"
+                android:text="类型"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/sampling_task_dev_title_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@color/white">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/sampling_task_check_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="主要检查概要"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_16"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/sampling_task_check_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="1.安全管理检查 \n2.电梯使用情况检查 "
+                    app:layout_constraintTop_toBottomOf="@id/sampling_task_check_title_tv"
+                    tools:ignore="MissingConstraints" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <TextView
+            android:id="@+id/sampling_task_basis_tv"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="28dp"
+            android:text="《检查依据》"
+            android:textColor="@color/main_button_bg"
+            android:textSize="@dimen/text_size_16" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sampling_task_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/main_btn_bg"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="收到任务，立即执行"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16" />
+    </LinearLayout>
+
+    <include
+        layout="@layout/error_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/task_list_item_title" />
+
+
+</RelativeLayout>

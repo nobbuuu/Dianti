@@ -1,0 +1,75 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.androidThis.compileSdkVersion
+    buildToolsVersion rootProject.ext.androidThis.buildToolsVersion
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.androidThis.minSdkVersion
+        targetSdkVersion rootProject.ext.androidThis.targetSdkVersion
+        versionCode rootProject.ext.androidThis.versionCodeParent
+        versionName rootProject.ext.androidThis.versionNameParent
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+
+    //图片加载工具
+    api rootProject.ext.deps.glide
+    annotationProcessor rootProject.ext.deps.glide_compiler
+
+    //okhttp3官方给的拦截器，版本号必须对应
+    api rootProject.ext.deps.logging_interceptor
+    api rootProject.ext.deps.okhttp3
+
+    /*rotrofit*/
+    //版本号必须对应
+    api rootProject.ext.deps.retrofit2
+    api rootProject.ext.deps.retrofit2_gson
+    api rootProject.ext.deps.adapter_rxjava
+
+    //rx系列
+    api rootProject.ext.deps.rxandroid2
+    api rootProject.ext.deps.rxjava2
+    api rootProject.ext.deps.rxlifecycle_c
+    api rootProject.ext.deps.rxlifecycle_n
+
+    //recyclerview
+    api rootProject.ext.deps.recyclerview
+    api rootProject.ext.deps.smartrefreshlayout
+
+    //material design
+    api rootProject.ext.deps.material
+    //eventbus
+    api rootProject.ext.deps.eventbus
+    //录音
+    api rootProject.ext.deps.recorder
+
+    //定位
+    api rootProject.ext.deps.location
+    //图片预览
+    api rootProject.ext.deps.photoview
+}

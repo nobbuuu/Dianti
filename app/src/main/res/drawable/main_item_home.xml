@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@mipmap/xzzf_icon_gray" android:state_checked="false" />
+    <item android:drawable="@mipmap/xzzf_icon_lihgt" android:state_enabled="true" />
+</selector>

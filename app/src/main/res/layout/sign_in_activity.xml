@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_bg"
+        android:orientation="vertical">
+
+
+    <com.base.baselib.view.TitleView
+            android:id="@+id/sin_in_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentInsetStart="0dp"
+            app:layout_collapseMode="pin"
+            app:textTitle="执行任务"
+            tools:ignore="MissingConstraints" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_below="@id/sin_in_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/wait_dialog_bg"
+            tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/sin_in_address_cl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_btn_bg"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                    android:id="@+id/sin_in_address_tag_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@mipmap/adss_icon_white"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/sin_in_address_tag_tv"
+                    tools:ignore="MissingConstraints" />
+
+            <TextView
+                    android:id="@+id/sin_in_address_tag_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="18dp"
+                    android:text="定位中..."
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_14"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/sin_in_address_tag_iv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ImageView
+                android:id="@+id/sin_in_user_address_tag_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/wdwz_icon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintBottom_toBottomOf="@id/sin_in_user_address_tag_tv"
+                app:layout_constraintTop_toTopOf="@id/sin_in_user_address_tag_tv" />
+
+        <TextView
+                android:text="我的位置"
+                android:textColor="@color/text_9_color"
+                android:textSize="@dimen/text_size_12"
+                android:layout_marginTop="2dp"
+                android:id="@+id/sin_in_user_address_tag_tv"
+                android:background="@drawable/sin_in_text_bg"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@+id/sin_in_user_address_tag_iv"
+                app:layout_constraintTop_toTopOf="@id/sin_in_user_address_tv" />
+
+        <TextView
+                android:id="@+id/sin_in_user_address_tv"
+                android:layout_width="0dp"
+                android:layout_marginLeft="16dp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="12dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="定位中..."
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintLeft_toRightOf="@+id/sin_in_user_address_tag_tv"
+                app:layout_constraintTop_toBottomOf="@id/sin_in_address_cl" />
+
+
+        <TextView
+                android:background="@color/sin_in_text_line_color"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                app:layout_constraintBottom_toTopOf="@id/sin_in_address_order_tag_iv"
+                app:layout_constraintTop_toBottomOf="@id/sin_in_user_address_tag_iv"
+                app:layout_constraintLeft_toLeftOf="@id/sin_in_user_address_tag_iv"
+                app:layout_constraintRight_toRightOf="@id/sin_in_user_address_tag_iv"
+                android:layout_width="1dp"
+                android:layout_height="0dp"/>
+
+        <ImageView
+                android:id="@+id/sin_in_address_order_tag_iv"
+                app:layout_constraintTop_toTopOf="@id/sin_in_user_order_tag_tv"
+                app:layout_constraintBottom_toBottomOf="@id/sin_in_user_order_tag_tv"
+                app:layout_constraintLeft_toLeftOf="@id/sin_in_user_address_tag_iv"
+                app:layout_constraintRight_toRightOf="@id/sin_in_user_address_tag_iv"
+                android:src="@mipmap/mdd_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/sin_in_user_order_tag_tv"
+                android:text="目的地点"
+                android:textColor="@color/text_9_color"
+                android:textSize="@dimen/text_size_12"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/sin_in_text_bg"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintTop_toTopOf="@id/sin_in_user_order_address_tv"
+                app:layout_constraintRight_toLeftOf="@id/sin_in_user_order_address_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/sin_in_user_order_address_tv"
+                android:layout_width="0dp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="12dp"
+                android:layout_height="wrap_content"
+                android:text="目标位置(无)"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_14"
+                android:layout_marginTop="46dp"
+                android:layout_marginBottom="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sin_in_user_address_tv"
+                app:layout_constraintLeft_toLeftOf="@id/sin_in_user_address_tv"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sign_in_btn"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginBottom="20dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_btn_bg"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="签到"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16" />
+</RelativeLayout>

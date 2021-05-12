@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="main_theme">#FFFFFF</color>
+    <color name="colorPrimary">#333333</color>
+    <color name="colorPrimaryDark">#333333</color>
+    <color name="colorAccent">#333333</color>
+
+    <color name="main_bg">#F5F5F7</color>
+    <color name="main_button_bg">#016EDD</color>
+
+    <color name="transparent">#00ffffff</color>
+    <color name="white">#ffffff</color>
+
+    <color name="red">#ff0000</color>
+    <color name="text_color">#333333</color>
+    <color name="text_9_color">#999</color>
+    <color name="text_6_color">#666</color>
+
+    <color name="authentication_not_bg_color">#6601020B</color>
+    <color name="authentication_not_text_color">#D7D7D7</color>
+    <color name="authentication_already_text_color">#FE8305</color>
+    <color name="user_info_phone_color">#77BEFE</color>
+
+    <color name="login_out_bg_color">#E4E4E4</color>
+    <color name="task_text_color">#B2D9FF</color>
+
+    <color name="sin_in_text_bg_color">#F8F8F8</color>
+    <color name="sin_in_text_line_color">#E7E7E7</color>
+
+
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="MissingDefaultResource">
+
+    <com.base.baselib.view.TitleView
+            android:id="@+id/web_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentInsetStart="0dp"
+            app:layout_collapseMode="pin"
+            app:textTitle=""
+            tools:ignore="MissingConstraints" />
+
+
+    <com.base.baselib.web.base.WebViewLocal
+            android:id="@+id/other_wvl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+</LinearLayout>

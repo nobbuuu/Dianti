@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">吉首市监</string>
+
+    <string name="main_tab_home">监督任务</string>
+    <string name="main_tab_message">个人中心</string>
+
+</resources>

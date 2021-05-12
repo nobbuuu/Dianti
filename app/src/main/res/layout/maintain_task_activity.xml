@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/main_bg">
+
+    <com.base.baselib.view.TitleView
+            android:id="@+id/maintain_task_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentInsetStart="0dp"
+            app:layout_collapseMode="pin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/maintain_task_sv"
+            app:textTitle="保养任务"
+            tools:ignore="MissingConstraints" />
+
+    <include
+            android:id="@+id/maintain_task_sv"
+            layout="@layout/maintain_task_view"
+            android:layout_height="70dp"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/maintain_task_title" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/maintain_task_sl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/maintain_task_sv">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/maintain_task_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <include layout="@layout/error_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/maintain_task_sv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="IncludeLayoutParam" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
