@@ -1,6 +1,7 @@
 package com.base.baselib.net;
 
 
+import com.base.baselib.bean.ChoiceTaskListBean;
 import com.base.baselib.bean.ChoicedBean;
 import com.base.baselib.bean.ComplaintTask;
 import com.base.baselib.bean.DevManagerBean;
@@ -136,6 +137,14 @@ public interface BaseApi {
     @FormUrlEncoded
     @POST("/api/mobile/user/updateUserPwd")
     Observable<Bean<EmptyBean>> updatePwd(@FieldMap Map<String, String> map);
+
+    /**
+     * 获取检查表类目
+     *
+     */
+    @FormUrlEncoded
+    @POST("/api/mobile/task/getPointByType")
+    Observable<Bean<ChoiceTaskListBean>> getPointByType(@FieldMap Map<String, String> map);
 
 
     @Multipart

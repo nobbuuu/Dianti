@@ -16,6 +16,7 @@ import com.base.baselib.utils.SpUtils;
 import com.base.baselib.utils.SpUtilsConstant;
 import com.qt.dtzf.R;
 import com.qt.dtzf.bean.TaskInfoBean;
+import com.qt.dtzf.ui.ChoiceTaskListActivity;
 import com.qt.dtzf.ui.TaskListItemActivity;
 import com.qt.dtzf.ui.TaskMainActivity;
 import com.qt.dtzf.ui.TaskSignInActivity;
@@ -79,7 +80,11 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
             case 2://食监任务
                 holder.tasktype_tv.setText("食监任务");
                 break;
-            case 3://生产单位任务
+            case 3://生产任务
+                holder.tasktype_tv.setText("生产任务");
+                break;
+            case 4://药品任务
+                holder.tasktype_tv.setText("药品任务");
                 break;
         }
         if (status == 0) {
@@ -124,22 +129,25 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
                         TaskListItemActivity.gotoActivity(mContext, item);
                         break;
                     case 2://待签到
-                        holder.taskstatus_tv.setText("待签到");
                         TaskSignInActivity.gotoActivity(mContext, item);
                         break;
-                    case 3://待执行
+                    case 3:
                     case 4:
                     case 5:
                     case 6:
                     case 7:
-                    case 8:
-                        if (item.getCategoryType() == 2) {
-                            holder.taskstatus_tv.setText("待执行");
-                            //拼接url
-                            String url = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + item.getId() + "&dataId=" + item.getDataId()
-                                    + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&dicName=" + item.getDicName() + "&qualityType=" + item.getQualityType();
-                            WebDetailsActivity.gotoActivity(mContext, url);
-                        } else if (item.getCategoryType() == 1){
+                    case 8://待执行
+                        if (item.getCategoryType() == 2 || item.getCategoryType() == 4) {
+                            if (item.getQualityType() == 2) {//复检任务
+                                //拼接url
+                                String url = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + item.getId() + "&dataId=" + item.getDataId()
+                                        + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&dicName=" + item.getDicName() + "&qualityType=" + item.getQualityType();
+                                WebDetailsActivity.gotoActivity(mContext, url);
+                            }else {
+                                ChoiceTaskListActivity.start(mContext, item);
+                            }
+
+                        } else if (item.getCategoryType() == 1) {
                             if (item.getQualityType() == 1) {
                                 TaskMainActivity.gotoActivity(mContext, item);
                             } else {
@@ -151,6 +159,15 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
                                             + "&isView=0" + "&type=0";
                                     WebDetailsActivity.gotoActivity(mContext, url);
                                 }
+                            }
+                        }else {//3
+                            String url = item.getTaskUrl();
+                            if (!TextUtils.isEmpty(url)) {
+                                //拼接url
+                                url = url + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + item.getId() + "&dataId=" + item.getDataId()
+                                        + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&dicName=" + item.getDicName() + "&qualityType=" + item.getQualityType()
+                                        + "&isView=0" + "&type=0";
+                                WebDetailsActivity.gotoActivity(mContext, url);
                             }
                         }
                         break;

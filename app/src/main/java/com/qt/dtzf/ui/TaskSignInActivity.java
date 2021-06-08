@@ -208,15 +208,18 @@ public class TaskSignInActivity extends BaseActivity {
                     public void onSuccess(Bean<SignBean> dataBean) {
                         if (dataBean.data != null) {
                             int categoryType = dataBean.data.getCategoryType();
-                            if (categoryType == 2) {
-                                String taskUrl = dataBean.data.getTaskUrl();
+                            if (categoryType == 2 || categoryType == 4) {
+                                if (mTaskInfo != null) {
+                                    ChoiceTaskListActivity.start(TaskSignInActivity.this, mTaskInfo);
+                                }
+                                /*String taskUrl = dataBean.data.getTaskUrl();
                                 if (!TextUtils.isEmpty(taskUrl)) {
                                     //拼接url
                                     taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + dataBean.data.getId() + "&dataId=" + dataBean.data.getDataId()
                                             + "&otherId=" + dataBean.data.getOtherId() + "&dicName=" + dataBean.data.getDicName() + "&qualityType=" + dataBean.data.getQualityType();
 
                                     WebDetailsActivity.gotoActivity(TaskSignInActivity.this, taskUrl);
-                                }
+                                }*/
                             } else if (categoryType == 1) {
                                 if (dataBean.data.getQualityType() == 1) {
                                     TaskMainActivity.gotoActivity(TaskSignInActivity.this, mTaskInfo);
@@ -230,10 +233,18 @@ public class TaskSignInActivity extends BaseActivity {
                                         WebDetailsActivity.gotoActivity(TaskSignInActivity.this, taskUrl);
                                     }
                                 }
+                            }else {//3
+                                String taskUrl = dataBean.data.getTaskUrl();
+                                if (!TextUtils.isEmpty(taskUrl)) {
+                                    //拼接url
+                                    taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + dataBean.data.getId() + "&dataId=" + dataBean.data.getDataId()
+                                            + "&otherId=" + dataBean.data.getOtherId() + "&dicName=" + dataBean.data.getDicName() + "&qualityType=" + dataBean.data.getQualityType()
+                                            + "&isView=0" + "&type=0";
+                                    WebDetailsActivity.gotoActivity(TaskSignInActivity.this, taskUrl);
+                                }
                             }
                         }
                     }
-
                     @Override
                     public void onStop() {
                         super.onStop();

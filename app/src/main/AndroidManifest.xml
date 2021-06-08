@@ -6,7 +6,7 @@
     <application
         android:name=".APP"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -125,10 +125,11 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
-        <activity android:name=".ui.ReCheckTaskListActivity"></activity>
-        <activity android:name=".ui.DevicesTypeListActivity"></activity>
-        <activity android:name=".ui.PerformTaskListActivity"></activity>
-        <activity android:name=".ui.WebDetailsCaseListActivity"></activity>
+        <activity android:name=".ui.ReCheckTaskListActivity"/>
+        <activity android:name=".ui.DevicesTypeListActivity"/>
+        <activity android:name=".ui.PerformTaskListActivity"/>
+        <activity android:name=".ui.WebDetailsCaseListActivity"/>
+        <activity android:name=".ui.ChoiceTaskListActivity"/>
 
         <!--高德地图-->
         <!--start-->

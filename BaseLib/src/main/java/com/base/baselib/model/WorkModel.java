@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.base.baselib.AppConstant;
+import com.base.baselib.bean.ChoiceTaskListBean;
 import com.base.baselib.bean.ChoicedBean;
 import com.base.baselib.bean.ComplaintTask;
 import com.base.baselib.bean.DevManagerBean;
@@ -273,6 +274,21 @@ public class WorkModel {
         return ApiManager.getInstance().getBaseApi().updatePwd(map);
     }
 
+    /**
+     * 获取检查列表类目
+     *
+     * @param type 1:食监，2：药监
+     * @return
+     */
+    public Observable<Bean<ChoiceTaskListBean>> getPointByType(String id, int type) {
+        Map<String, String> map = new HashMap<>();
+        map.put(SpUtilsConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
+        map.put("otherId", SpUtils.getInt(SpUtilsConstant.otherId) + "");
+        map.put("id", id);
+        map.put("type", type + "");
+        return ApiManager.getInstance().getBaseApi().getPointByType(map);
+    }
+
 
     /**
      * 上传签名
@@ -466,8 +482,8 @@ public class WorkModel {
         map.put("id", id);
         map.put("xcqzImg", xcqzImg);
         map.put("token", SpUtils.getString(SpUtilsConstant.apiKey));
-        Log.d("aaa","id = " + id);
-        Log.d("aaa","xcqzImg = " + xcqzImg);
+        Log.d("aaa", "id = " + id);
+        Log.d("aaa", "xcqzImg = " + xcqzImg);
         return ApiManager.getInstance().getBaseApi().saveXCQZImg(map);
     }
 

@@ -1,6 +1,8 @@
 package com.base.baselib.bean;
 
-public class SignBean {
+import java.io.Serializable;
+
+public class SignBean implements Serializable {
 
     /**
      * otherId : 119

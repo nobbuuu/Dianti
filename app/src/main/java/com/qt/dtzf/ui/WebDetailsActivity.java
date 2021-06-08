@@ -115,9 +115,14 @@ public class WebDetailsActivity extends WebActivity {
     public void onGetMessage(String message) {
         if (message.equals("handlerSubmit")) {
             Intent intent = null;
-            if (taskInfo != null && taskInfo.getCategoryType() == 1) {
-                intent = new Intent(this, TaskMainActivity.class);
-                intent.putExtra("taskInfo", taskInfo);
+            if (taskInfo != null) {
+                if (taskInfo.getCategoryType() == 1){
+                    intent = new Intent(this, TaskMainActivity.class);
+                    intent.putExtra("taskInfo", taskInfo);
+                }else if (taskInfo.getCategoryType() == 2){
+                    intent = new Intent(this, ChoiceTaskListActivity.class);
+                    intent.putExtra("taskInfoBean", taskInfo);
+                }
             } else {
                 intent = new Intent(this, TaskListActivity.class);
             }

@@ -19,15 +19,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="6dp"
             android:text="特种设备定式检查记录"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:textColor="@color/text_color"
+            android:singleLine="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/task_confirm_doc_tv"
             android:textSize="@dimen/text_size_15" />
 
-
+        <TextView
+            android:id="@+id/status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="已填写"
+            android:textColor="@color/main_button_bg"
+            android:layout_toLeftOf="@+id/next_iv"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/text_size_12" />
         <ImageView
+            android:id="@+id/next_iv"
             android:layout_width="9dp"
             android:layout_height="16dp"
             android:layout_alignParentRight="true"
