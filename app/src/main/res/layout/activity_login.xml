@@ -23,7 +23,7 @@
             android:maxLength="11"
             android:maxLines="1"
             android:padding="12dp"
-            android:text="15580835064"
+            android:text=""
             android:textColor="@color/text_color"
             android:textSize="@dimen/text_size_16" />
 
@@ -38,7 +38,7 @@
             android:maxLength="8"
             android:maxLines="1"
             android:padding="12dp"
-            android:text="123456"
+            android:text=""
             android:textColor="@color/text_color"
             android:textSize="@dimen/text_size_16" />
 

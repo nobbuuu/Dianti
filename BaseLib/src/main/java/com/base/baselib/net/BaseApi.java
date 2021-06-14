@@ -146,6 +146,22 @@ public interface BaseApi {
     @POST("/api/mobile/task/getPointByType")
     Observable<Bean<ChoiceTaskListBean>> getPointByType(@FieldMap Map<String, String> map);
 
+    /**
+     *检查完成（药品）
+     *
+     */
+    @FormUrlEncoded
+    @POST("/api/mobile/drug/saveDrugAllInfo")
+    Observable<Bean<EmptyBean>> saveDrugAllInfo(@FieldMap Map<String, String> map);
+
+    /**
+     *检查完成（食品）
+     *
+     */
+    @FormUrlEncoded
+    @POST("/api/mobile/task/saveFoodAllInfo")
+    Observable<Bean<EmptyBean>> saveFoodAllInfo(@FieldMap Map<String, String> map);
+
 
     @Multipart
     @POST("/api/mobile/user/uploadSignatureForAndroid")

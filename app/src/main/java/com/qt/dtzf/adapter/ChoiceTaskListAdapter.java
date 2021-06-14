@@ -46,22 +46,26 @@ public class ChoiceTaskListAdapter extends RVBaseAdapter<ChoiceTaskListBean.List
                 TaskInfo.ListBean taskInfo = new TaskInfo.ListBean();
                 taskInfo.setCategoryType(listBean.getCategoryType());
                 taskInfo.setDicName(listBean.getDicName());
+                taskInfo.setPointType(listBean.getPointType());
                 taskInfo.setDataId(listBean.getDataId());
                 taskInfo.setQualityType(listBean.getQualityType());
                 taskInfo.setStatus(listBean.getStatus());
-                taskInfo.setTaskId(listBean.getTaskId()+"");
+                taskInfo.setTaskId(listBean.getTaskId() + "");
+                taskInfo.setId(listBean.getId() + "");
                 taskInfo.setTaskUrl(listBean.getTaskUrl());
 
                 if (isDone && listBean.getStatus() == 1) {
                     String taskUrl = listBean.getTaskUrl();
                     if (!TextUtils.isEmpty(taskUrl)) {
-                        taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + listBean.getId() + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId);
+                        taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + listBean.getId() + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId)
+                                + "&dickName=" + listBean.getDicName() + "&pointType=" + listBean.getPointType();
                         WebDetailsActivity.gotoActivity(context, taskUrl, taskInfo);
                     }
                 } else if (!isDone) {
                     String taskUrl = listBean.getTaskUrl();
                     if (!TextUtils.isEmpty(taskUrl)) {
-                        taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + listBean.getId() + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId);
+                        taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + listBean.getId() + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId)
+                                + "&dickName=" + listBean.getDicName() + "&pointType=" + listBean.getPointType();
                         WebDetailsActivity.gotoActivity(context, taskUrl, taskInfo);
                     }
                 }

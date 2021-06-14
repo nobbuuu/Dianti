@@ -278,6 +278,7 @@ public class TaskInfo implements Serializable {
         private int categoryType;
         private int taskType;
         private int qualityType;
+        private int pointType;
         private Object parentId;
         private String content;
         private Object countNum;
@@ -286,6 +287,14 @@ public class TaskInfo implements Serializable {
         private String dicName;
         private String checkBasis;
         private Object searchParentId;
+
+        public int getPointType() {
+            return pointType;
+        }
+
+        public void setPointType(int pointType) {
+            this.pointType = pointType;
+        }
 
         public String getCheckBasis() {
             return checkBasis;

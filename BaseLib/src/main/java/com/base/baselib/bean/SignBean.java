@@ -21,6 +21,15 @@ public class SignBean implements Serializable {
     private int qualityType;
     private int taskId;
     private int categoryType;
+    private int pointType;
+
+    public int getPointType() {
+        return pointType;
+    }
+
+    public void setPointType(int pointType) {
+        this.pointType = pointType;
+    }
 
     public int getCategoryType() {
         return categoryType;

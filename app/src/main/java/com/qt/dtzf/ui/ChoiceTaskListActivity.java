@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.base.baselib.base.BaseActivity;
+import com.base.baselib.bean.EmptyBean;
 import com.base.baselib.bean.ImgBean;
 import com.base.baselib.bean.SignBean;
 import com.base.baselib.bean.TaskInfo;
@@ -22,6 +23,7 @@ import com.base.baselib.net.DefaultObserver;
 import com.base.baselib.utils.AlbumUtils;
 import com.base.baselib.utils.SpUtils;
 import com.base.baselib.utils.SpUtilsConstant;
+import com.base.baselib.utils.Utils;
 import com.qt.dtzf.R;
 import com.base.baselib.bean.ChoiceTaskListBean;
 import com.qt.dtzf.adapter.ChoiceTaskListAdapter;
@@ -53,6 +55,7 @@ public class ChoiceTaskListActivity extends BaseActivity {
     private TaskInfo.ListBean mTaskInfo;
     private String xcqzImg;
     private AlbumUtils mAlbumUtils;
+    private boolean isDone;
 
     public static void start(Context context, TaskInfo.ListBean taskInfoBean) {
         Intent intent = new Intent(context, ChoiceTaskListActivity.class);
@@ -77,6 +80,10 @@ public class ChoiceTaskListActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (mTaskInfo == null) {
+            ToastUtils.Toast_long("数据异常，请重试");
+            return;
+        }
         Observable<Bean<ChoiceTaskListBean>> pwd = WorkModel.getInstance().getPointByType(mTaskInfo.getId(), mTaskInfo.getCategoryType() / 2);
         showWaitDialog();
         pwd.compose(this.bindToLifecycle())
@@ -90,6 +97,11 @@ public class ChoiceTaskListActivity extends BaseActivity {
                         if (dataList != null && dataList.size() > 0) {
                             ChoiceTaskListAdapter adapter = new ChoiceTaskListAdapter(ChoiceTaskListActivity.this, dataList, R.layout.rvitem_deviceitem);
                             tasklistRv.setAdapter(adapter);
+                            for (ChoiceTaskListBean.ListBean bean : dataList) {
+                                if (bean.getStatus() == 1) {
+                                    isDone = true;
+                                }
+                            }
                         }
                     }
 
@@ -101,20 +113,68 @@ public class ChoiceTaskListActivity extends BaseActivity {
                 });
     }
 
+    private void checkComplete() {
+        if (mTaskInfo.getCategoryType() == 2) {
+            Observable<Bean<EmptyBean>> pwd = WorkModel.getInstance().saveFoodAllInfo(mTaskInfo.getId());
+            showWaitDialog();
+            pwd.compose(this.bindToLifecycle())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new DefaultObserver<Bean<EmptyBean>>() {
+                        @Override
+                        public void onSuccess(Bean<EmptyBean> dataBean) {
+                            Utils.showToast("提交成功");
+                            finish();
+                        }
+
+                        @Override
+                        public void onStop() {
+                            super.onStop();
+                            hideWaitDialog();
+                        }
+                    });
+        } else if (mTaskInfo.getCategoryType() == 4) {
+            Observable<Bean<EmptyBean>> pwd = WorkModel.getInstance().saveDrugAllInfo(mTaskInfo.getId());
+            showWaitDialog();
+            pwd.compose(this.bindToLifecycle())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new DefaultObserver<Bean<EmptyBean>>() {
+                        @Override
+                        public void onSuccess(Bean<EmptyBean> dataBean) {
+                           /* String taskUrl = mTaskInfo.getTaskUrl();
+                            int otherId = SpUtils.getInt(SpUtilsConstant.otherId);
+                            if (!TextUtils.isEmpty(taskUrl)) {
+                                //拼接url
+                                taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + mTaskInfo.getId() + "&dataId=" + mTaskInfo.getDataId()
+                                        + "&otherId=" + otherId + "&dicName=" + mTaskInfo.getDicName() + "&qualityType=" + mTaskInfo.getQualityType();
+
+                                WebDetailsActivity.gotoActivity(mContext, taskUrl);
+                            }*/
+                            Utils.showToast("提交成功");
+                            finish();
+                        }
+
+                        @Override
+                        public void onStop() {
+                            super.onStop();
+                            hideWaitDialog();
+                        }
+                    });
+        }
+    }
+
     @OnClick({R.id.task_confirm_btn, R.id.task_confirm_lay})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.task_confirm_btn:
                 int categoryType = mTaskInfo.getCategoryType();
                 int otherId = SpUtils.getInt(SpUtilsConstant.otherId);
-                if (categoryType == 2) {
-                    String taskUrl = mTaskInfo.getTaskUrl();
-                    if (!TextUtils.isEmpty(taskUrl)) {
-                        //拼接url
-                        taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + mTaskInfo.getId() + "&dataId=" + mTaskInfo.getDataId()
-                                + "&otherId=" + otherId + "&dicName=" + mTaskInfo.getDicName() + "&qualityType=" + mTaskInfo.getQualityType();
-
-                        WebDetailsActivity.gotoActivity(mContext, taskUrl);
+                if (categoryType == 2 || categoryType == 4) {
+                    if (isDone) {
+                        checkComplete();
+                    }else {
+                        ToastUtils.Toast_long("检查要点表未填写");
                     }
                 } else if (categoryType == 1) {
                     if (mTaskInfo.getQualityType() == 1) {

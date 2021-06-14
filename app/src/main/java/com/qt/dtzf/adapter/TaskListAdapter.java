@@ -137,13 +137,14 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
                     case 6:
                     case 7:
                     case 8://待执行
-                        if (item.getCategoryType() == 2 || item.getCategoryType() == 4) {
+                        if (item.getCategoryType() == 2 || item.getCategoryType() == 4) {//食品、药品任务
                             if (item.getQualityType() == 2) {//复检任务
                                 //拼接url
                                 String url = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + item.getId() + "&dataId=" + item.getDataId()
-                                        + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&dicName=" + item.getDicName() + "&qualityType=" + item.getQualityType();
+                                        + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&dicName=" + item.getDicName() + "&qualityType=" + item.getQualityType()
+                                        + "&pointType=" + item.getPointType();
                                 WebDetailsActivity.gotoActivity(mContext, url);
-                            }else {
+                            } else {
                                 ChoiceTaskListActivity.start(mContext, item);
                             }
 
@@ -156,29 +157,31 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
                                     //拼接url
                                     url = url + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + item.getId() + "&dataId=" + item.getDataId()
                                             + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&dicName=" + item.getDicName() + "&qualityType=" + item.getQualityType()
-                                            + "&isView=0" + "&type=0";
+                                            + "&isView=0" + "&type=0" + "&pointType=" + item.getPointType();
                                     WebDetailsActivity.gotoActivity(mContext, url);
                                 }
                             }
-                        }else {//3
+                        } else {//3
                             String url = item.getTaskUrl();
                             if (!TextUtils.isEmpty(url)) {
                                 //拼接url
                                 url = url + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + item.getId() + "&dataId=" + item.getDataId()
                                         + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&dicName=" + item.getDicName() + "&qualityType=" + item.getQualityType()
-                                        + "&isView=0" + "&type=0";
+                                        + "&isView=0" + "&type=0" + "&pointType=" + item.getPointType();
                                 WebDetailsActivity.gotoActivity(mContext, url);
                             }
                         }
                         break;
                     case 98://需复检
                         String url = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + item.getId() + "&taskId=" + item.getTaskId()
-                                + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&isView=1" + "&type=0" + "&qualityType=" + item.getQualityType();
+                                + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&isView=1" + "&type=0" + "&qualityType=" + item.getQualityType() + "&pointType=" + item.getPointType()
+                                + "dickName=" + item.getDicName();
                         WebDetailsActivity.gotoActivity(mContext, url);
                         break;
                     case 100://通过
                         String url_complete = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + item.getId() + "&taskId=" + item.getTaskId()
-                                + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&isView=1" + "&type=1" + "&qualityType=" + item.getQualityType();
+                                + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&isView=1" + "&type=1" + "&qualityType=" + item.getQualityType()+ "&pointType=" + item.getPointType()
+                                + "dickName=" + item.getDicName();
                         WebDetailsActivity.gotoActivity(mContext, url_complete);
                         break;
                 }

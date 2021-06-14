@@ -3,23 +3,27 @@ package com.base.baselib.bean;
 public class DeviceTypeItem {
 
     /**
-     * id : 56
+     * taskUrl : http://ydjgh5.chenhl.cn/equipment/record/elevator
      * name : SPECIAL_EQUIPMENT
      * description : 特种设备现场安全监督检查记录（电梯）
-     * listDataDictionary : null
+     * pointType : 1
+     * dicName : ELEVATOR_POINT
+     * status : 0
      */
 
-    private int id;
+    private String taskUrl;
     private String name;
     private String description;
-    private Object listDataDictionary;
+    private int pointType;
+    private String dicName;
+    private int status;
 
-    public int getId() {
-        return id;
+    public String getTaskUrl() {
+        return taskUrl;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTaskUrl(String taskUrl) {
+        this.taskUrl = taskUrl;
     }
 
     public String getName() {
@@ -38,11 +42,27 @@ public class DeviceTypeItem {
         this.description = description;
     }
 
-    public Object getListDataDictionary() {
-        return listDataDictionary;
+    public int getPointType() {
+        return pointType;
     }
 
-    public void setListDataDictionary(Object listDataDictionary) {
-        this.listDataDictionary = listDataDictionary;
+    public void setPointType(int pointType) {
+        this.pointType = pointType;
+    }
+
+    public String getDicName() {
+        return dicName;
+    }
+
+    public void setDicName(String dicName) {
+        this.dicName = dicName;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

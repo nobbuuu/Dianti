@@ -170,7 +170,8 @@ public class ChoiceElevatorActivity extends BaseActivity {
                         if (bean != null) {
                             String taskUrl = bean.getTaskUrl();
                             if (!TextUtils.isEmpty(taskUrl)) {
-                                taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + bean.getId() + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId);
+                                taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + bean.getId()
+                                        + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&dicName=" + bean.getDicName() + "&&pointType=" + bean.getPointType();
                                 WebDetailsActivity.gotoActivity(ChoiceElevatorActivity.this, taskUrl);
                             }
                         }

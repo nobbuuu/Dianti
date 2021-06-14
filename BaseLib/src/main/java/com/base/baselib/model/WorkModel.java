@@ -289,6 +289,30 @@ public class WorkModel {
         return ApiManager.getInstance().getBaseApi().getPointByType(map);
     }
 
+    /**
+     * 检查完成（药品）
+     *
+     * @return
+     */
+    public Observable<Bean<EmptyBean>> saveDrugAllInfo(String id) {
+        Map<String, String> map = new HashMap<>();
+        map.put(SpUtilsConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
+        map.put("id", id);
+        return ApiManager.getInstance().getBaseApi().saveDrugAllInfo(map);
+    }
+
+    /**
+     * 检查完成（食品）
+     *
+     * @return
+     */
+    public Observable<Bean<EmptyBean>> saveFoodAllInfo(String id) {
+        Map<String, String> map = new HashMap<>();
+        map.put(SpUtilsConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
+        map.put("id", id);
+        return ApiManager.getInstance().getBaseApi().saveFoodAllInfo(map);
+    }
+
 
     /**
      * 上传签名
@@ -450,9 +474,10 @@ public class WorkModel {
         return ApiManager.getInstance().getBaseApi().getMaintainTaskList(map);
     }
 
-    public Observable<BeanList<DeviceTypeItem>> getSpecialTypeList() {
+    public Observable<BeanList<DeviceTypeItem>> getSpecialTypeList(String taskDistributeId) {
         Map<String, String> map = new HashMap<>();
         map.put("name", "SPECIAL_EQUIPMENT");
+        map.put("taskDistributeId", taskDistributeId);
         map.put("token", SpUtils.getString(SpUtilsConstant.apiKey));
         return ApiManager.getInstance().getBaseApi().getSpecialTypeList(map);
     }

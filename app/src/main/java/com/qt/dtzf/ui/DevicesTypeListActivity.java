@@ -28,6 +28,7 @@ public class DevicesTypeListActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
     private DeviceTypesAdapter mTypesAdapter;
     private List<DeviceTypeItem> dataList = new ArrayList<>();
+    private String taskId;
 
     public static void gotoActivity(Activity activity, String taskId) {
         Intent intent = new Intent(activity, DevicesTypeListActivity.class);
@@ -40,14 +41,14 @@ public class DevicesTypeListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_type_list);
         mRecyclerView = findViewById(R.id.device_type_rv);
-        String taskId = getIntent().getStringExtra("taskId");
+        taskId = getIntent().getStringExtra("taskId");
         mTypesAdapter = new DeviceTypesAdapter(this, dataList, R.layout.rvitem_deviceitem,taskId);
         mRecyclerView.setAdapter(mTypesAdapter);
         getData();
     }
 
     private void getData() {
-        Observable<BeanList<DeviceTypeItem>> upLocation = WorkModel.getInstance().getSpecialTypeList();
+        Observable<BeanList<DeviceTypeItem>> upLocation = WorkModel.getInstance().getSpecialTypeList(taskId);
         showWaitDialog();
         upLocation.compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())

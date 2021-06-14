@@ -209,17 +209,22 @@ public class TaskSignInActivity extends BaseActivity {
                         if (dataBean.data != null) {
                             int categoryType = dataBean.data.getCategoryType();
                             if (categoryType == 2 || categoryType == 4) {
-                                if (mTaskInfo != null) {
-                                    ChoiceTaskListActivity.start(TaskSignInActivity.this, mTaskInfo);
-                                }
-                                /*String taskUrl = dataBean.data.getTaskUrl();
-                                if (!TextUtils.isEmpty(taskUrl)) {
-                                    //拼接url
-                                    taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + dataBean.data.getId() + "&dataId=" + dataBean.data.getDataId()
-                                            + "&otherId=" + dataBean.data.getOtherId() + "&dicName=" + dataBean.data.getDicName() + "&qualityType=" + dataBean.data.getQualityType();
+                                if (dataBean.data.getQualityType() == 2) {//复检任务
+                                    String taskUrl = dataBean.data.getTaskUrl();
+                                    if (!TextUtils.isEmpty(taskUrl)) {
+                                        //拼接url
+                                        taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + dataBean.data.getId() + "&dataId=" + dataBean.data.getDataId()
+                                                + "&otherId=" + dataBean.data.getOtherId() + "&dicName=" + dataBean.data.getDicName() + "&qualityType=" + dataBean.data.getQualityType()
+                                                + "&pointType=" + dataBean.data.getPointType();
 
-                                    WebDetailsActivity.gotoActivity(TaskSignInActivity.this, taskUrl);
-                                }*/
+                                        WebDetailsActivity.gotoActivity(TaskSignInActivity.this, taskUrl);
+                                    }
+                                } else {
+                                    if (mTaskInfo != null) {
+                                        ChoiceTaskListActivity.start(TaskSignInActivity.this, mTaskInfo);
+                                    }
+                                }
+
                             } else if (categoryType == 1) {
                                 if (dataBean.data.getQualityType() == 1) {
                                     TaskMainActivity.gotoActivity(TaskSignInActivity.this, mTaskInfo);
@@ -229,22 +234,23 @@ public class TaskSignInActivity extends BaseActivity {
                                         //拼接url
                                         taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + dataBean.data.getId() + "&dataId=" + dataBean.data.getDataId()
                                                 + "&otherId=" + dataBean.data.getOtherId() + "&dicName=" + dataBean.data.getDicName() + "&qualityType=" + dataBean.data.getQualityType()
-                                                + "&isView=0" + "&type=0";
+                                                + "&isView=0" + "&type=0" + "&pointType=" + dataBean.data.getPointType() + "&dickName=" + dataBean.data.getDicName();
                                         WebDetailsActivity.gotoActivity(TaskSignInActivity.this, taskUrl);
                                     }
                                 }
-                            }else {//3
+                            } else {//3
                                 String taskUrl = dataBean.data.getTaskUrl();
                                 if (!TextUtils.isEmpty(taskUrl)) {
                                     //拼接url
                                     taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + dataBean.data.getId() + "&dataId=" + dataBean.data.getDataId()
                                             + "&otherId=" + dataBean.data.getOtherId() + "&dicName=" + dataBean.data.getDicName() + "&qualityType=" + dataBean.data.getQualityType()
-                                            + "&isView=0" + "&type=0";
+                                            + "&isView=0" + "&type=0" + "&pointType=" + dataBean.data.getPointType() + "&dickName=" + dataBean.data.getDicName();
                                     WebDetailsActivity.gotoActivity(TaskSignInActivity.this, taskUrl);
                                 }
                             }
                         }
                     }
+
                     @Override
                     public void onStop() {
                         super.onStop();

@@ -21,6 +21,15 @@ public class ChoicedBean {
     private int qualityType;
     private String dicName;
     private int taskId;
+    private int pointType;
+
+    public int getPointType() {
+        return pointType;
+    }
+
+    public void setPointType(int pointType) {
+        this.pointType = pointType;
+    }
 
     public int getCategoryType() {
         return categoryType;
