@@ -175,13 +175,13 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
                     case 98://需复检
                         String url = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + item.getId() + "&taskId=" + item.getTaskId()
                                 + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&isView=1" + "&type=0" + "&qualityType=" + item.getQualityType() + "&pointType=" + item.getPointType()
-                                + "dickName=" + item.getDicName();
+                                + "dicName=" + item.getDicName();
                         WebDetailsActivity.gotoActivity(mContext, url);
                         break;
                     case 100://通过
                         String url_complete = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + item.getId() + "&taskId=" + item.getTaskId()
                                 + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&isView=1" + "&type=1" + "&qualityType=" + item.getQualityType()+ "&pointType=" + item.getPointType()
-                                + "dickName=" + item.getDicName();
+                                + "dicName=" + item.getDicName();
                         WebDetailsActivity.gotoActivity(mContext, url_complete);
                         break;
                 }

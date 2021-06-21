@@ -58,14 +58,14 @@ public class ChoiceTaskListAdapter extends RVBaseAdapter<ChoiceTaskListBean.List
                     String taskUrl = listBean.getTaskUrl();
                     if (!TextUtils.isEmpty(taskUrl)) {
                         taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + listBean.getId() + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId)
-                                + "&dickName=" + listBean.getDicName() + "&pointType=" + listBean.getPointType();
+                                + "&dicName=" + listBean.getDicName() + "&pointType=" + listBean.getPointType();
                         WebDetailsActivity.gotoActivity(context, taskUrl, taskInfo);
                     }
                 } else if (!isDone) {
                     String taskUrl = listBean.getTaskUrl();
                     if (!TextUtils.isEmpty(taskUrl)) {
                         taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + listBean.getId() + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId)
-                                + "&dickName=" + listBean.getDicName() + "&pointType=" + listBean.getPointType();
+                                + "&dicName=" + listBean.getDicName() + "&pointType=" + listBean.getPointType();
                         WebDetailsActivity.gotoActivity(context, taskUrl, taskInfo);
                     }
                 }

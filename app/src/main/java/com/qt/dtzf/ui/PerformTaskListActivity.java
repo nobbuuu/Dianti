@@ -66,6 +66,7 @@ public class PerformTaskListActivity extends BaseActivity {
     }
 
     private void initData() {
+        mSrl.setOnRefreshLoadMoreListener(mLoadMoreListener);
         mAdapter = new PerformTaskListAdapter(this, dataList, R.layout.rvitem_perform);
         taskListRv.setAdapter(mAdapter);
     }

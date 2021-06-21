@@ -329,7 +329,11 @@ public class TaskMainActivity extends BaseActivity {
                         String taskUrl = mH5ResultBean.getJCJL();
                         if (jcjl_status != null && jcjl_status.equals("1")) {//已完成
                             if (!TextUtils.isEmpty(taskUrl)) {
-                                taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + mTaskInfo.getId() + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId);
+                                taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + mTaskInfo.getId() +
+                                        "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId);
+                                if (mH5ResultBean.getDicName() != null && mH5ResultBean.getPointType() != null) {
+                                    taskUrl = taskUrl + "&dicName=" + mH5ResultBean.getDicName() + "&pointType=" + mH5ResultBean.getPointType();
+                                }
                                 toWebdetailActivity(taskUrl);
                             }
                         } else {
@@ -383,7 +387,7 @@ public class TaskMainActivity extends BaseActivity {
     }
 
     private void toWebdetailActivity(String taskUrl) {
-        if (mTaskInfo != null){
+        if (mTaskInfo != null) {
             WebDetailsActivity.gotoActivity(TaskMainActivity.this, taskUrl, mTaskInfo);
         }
     }

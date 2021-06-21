@@ -4,8 +4,8 @@ ext {
             minSdkVersion    : 22,
             targetSdkVersion : 29,
             buildToolsVersion: "29.0.2",
-            versionCodeParent: 20210423,
-            versionNameParent: "1.1.1"
+            versionCodeParent: 20210620,
+            versionNameParent: "1.1.2"
     ]
 
     depsVersion = [

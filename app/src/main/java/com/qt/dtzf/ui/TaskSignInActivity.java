@@ -199,7 +199,7 @@ public class TaskSignInActivity extends BaseActivity {
 
     private void upData(AddressInfo addressInfo) {
         Observable<Bean<SignBean>> upLocation = WorkModel.getInstance().userAutograph(mTaskInfo.getId(), addressInfo.longitude, addressInfo.latitude, addressInfo.address,
-                (int) System.currentTimeMillis() / 1000, mTaskInfo.getTaskId());
+                System.currentTimeMillis() / 1000, mTaskInfo.getTaskId());
         upLocation.compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -234,7 +234,7 @@ public class TaskSignInActivity extends BaseActivity {
                                         //拼接url
                                         taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + dataBean.data.getId() + "&dataId=" + dataBean.data.getDataId()
                                                 + "&otherId=" + dataBean.data.getOtherId() + "&dicName=" + dataBean.data.getDicName() + "&qualityType=" + dataBean.data.getQualityType()
-                                                + "&isView=0" + "&type=0" + "&pointType=" + dataBean.data.getPointType() + "&dickName=" + dataBean.data.getDicName();
+                                                + "&isView=0" + "&type=0" + "&pointType=" + dataBean.data.getPointType() + "&dicName=" + dataBean.data.getDicName();
                                         WebDetailsActivity.gotoActivity(TaskSignInActivity.this, taskUrl);
                                     }
                                 }
@@ -244,7 +244,7 @@ public class TaskSignInActivity extends BaseActivity {
                                     //拼接url
                                     taskUrl = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + dataBean.data.getId() + "&dataId=" + dataBean.data.getDataId()
                                             + "&otherId=" + dataBean.data.getOtherId() + "&dicName=" + dataBean.data.getDicName() + "&qualityType=" + dataBean.data.getQualityType()
-                                            + "&isView=0" + "&type=0" + "&pointType=" + dataBean.data.getPointType() + "&dickName=" + dataBean.data.getDicName();
+                                            + "&isView=0" + "&type=0" + "&pointType=" + dataBean.data.getPointType() + "&dicName=" + dataBean.data.getDicName();
                                     WebDetailsActivity.gotoActivity(TaskSignInActivity.this, taskUrl);
                                 }
                             }

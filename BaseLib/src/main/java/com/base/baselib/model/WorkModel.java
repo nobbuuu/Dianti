@@ -116,13 +116,14 @@ public class WorkModel {
         return ApiManager.getInstance().getBaseApi().upLocation(map);
     }
 
-    public Observable<Bean<SignBean>> userAutograph(String id, String longitude, String latitude, String signaddress, int signdate, String taskId) {
+    public Observable<Bean<SignBean>> userAutograph(String id, String longitude, String latitude, String signaddress, long signdate, String taskId) {
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
         map.put("longitude", longitude);
         map.put("latitude", latitude);
         map.put("signaddress", signaddress);
         map.put("otherId", SpUtils.getInt(SpUtilsConstant.otherId));
+        Log.d("ddd","signdate = " + signdate);
         map.put("signdate", signdate);
         map.put("taskId", taskId);
         map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));

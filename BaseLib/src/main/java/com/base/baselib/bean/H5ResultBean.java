@@ -13,6 +13,8 @@ public class H5ResultBean {
      * XCBL_status : 1
      * ZDWT : http://ydjgh5.chenhl.cn/task/elevator
      * YBWT : http://ydjgh5.chenhl.cn/task/elevator
+     * dicName:111
+     * pointType:222
      */
 
     private String ZDWT_status;
@@ -28,6 +30,24 @@ public class H5ResultBean {
     private String ZDWT;
     private String YBWT;
     private String xcqzImg;
+    private String dicName;
+    private String pointType;
+
+    public String getDicName() {
+        return dicName;
+    }
+
+    public void setDicName(String dicName) {
+        this.dicName = dicName;
+    }
+
+    public String getPointType() {
+        return pointType;
+    }
+
+    public void setPointType(String pointType) {
+        this.pointType = pointType;
+    }
 
     public String getXcqzImg() {
         return xcqzImg;
