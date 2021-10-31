@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.base.baselib.base.BaseActivity;
-import com.google.android.material.tabs.TabLayout;
 import com.qt.dtzf.R;
 import com.qt.dtzf.adapter.TaskFragmentAdapter;
 import com.qt.dtzf.ui.fragment.TaskListFragment;
@@ -23,13 +22,13 @@ import java.util.ArrayList;
  * 1 双随机监管
  * 2 专项检查
  */
-public class ReCheckTaskListActivity extends BaseActivity {
+public class SingleTaskListActivity extends BaseActivity {
     private String[] mTitles = new String[]{"",};
     private ArrayList<TaskListFragment> mFragments = new ArrayList<>();
     public String category_type = "1";
 
     public static void gotoActivity(Activity activity, String type) {
-        Intent intent = new Intent(activity, ReCheckTaskListActivity.class);
+        Intent intent = new Intent(activity, SingleTaskListActivity.class);
         intent.putExtra("type", type);
         activity.startActivity(intent);
     }

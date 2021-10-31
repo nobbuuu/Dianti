@@ -19,14 +19,10 @@ public class ChoiceElevatorItemAdapter extends CommonAdapter<ElevatorInfo.ListEl
 
     @Override
     public void onBind(BaseViewHolder holder, ElevatorInfo.ListElevatorBeanX.ListElevatorBean listElevatorBean, int position) {
-        String numberno = listElevatorBean.getNumberno();
+        String numberno = listElevatorBean.getRegisterNo();
         TextView mTv = holder.getView(R.id.choice_elevator_tv);
         if (!TextUtils.isEmpty(numberno)) {
-            if (numberno.length() > 6) {
-                holder.setText(R.id.choice_elevator_tv, numberno.substring(numberno.length() - 7, numberno.length() - 1));
-            } else {
-                holder.setText(R.id.choice_elevator_tv, numberno);
-            }
+            holder.setText(R.id.choice_elevator_tv, numberno);
         }
 
         if (listElevatorBean.isSelect()){

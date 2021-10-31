@@ -263,17 +263,23 @@ public class TaskInfo implements Serializable {
          */
 
         private String id;
+        private String sid;
         private String taskId;
         private int dataId;
         private String dataName;
+        private String title;
+        private String seTitle;
         private String dataAddress;
+        private String signAddress;
         private String dataLongitude;
         private String dataLatitude;
         private String userIds;
         private String userNames;
         private String userPhones;
         private int startdate;
+        private String startDate;
         private int enddate;
+        private String endDate;
         private int status;
         private int categoryType;
         private int taskType;
@@ -287,6 +293,54 @@ public class TaskInfo implements Serializable {
         private String dicName;
         private String checkBasis;
         private Object searchParentId;
+
+        public String getStartDate() {
+            return startDate;
+        }
+
+        public void setStartDate(String startDate) {
+            this.startDate = startDate;
+        }
+
+        public String getEndDate() {
+            return endDate;
+        }
+
+        public void setEndDate(String endDate) {
+            this.endDate = endDate;
+        }
+
+        public String getSignAddress() {
+            return signAddress;
+        }
+
+        public void setSignAddress(String signAddress) {
+            this.signAddress = signAddress;
+        }
+
+        public String getSid() {
+            return sid;
+        }
+
+        public void setSid(String sid) {
+            this.sid = sid;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getSeTitle() {
+            return seTitle;
+        }
+
+        public void setSeTitle(String seTitle) {
+            this.seTitle = seTitle;
+        }
 
         public int getPointType() {
             return pointType;

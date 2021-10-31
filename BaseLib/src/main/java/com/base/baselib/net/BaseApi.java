@@ -173,7 +173,11 @@ public interface BaseApi {
 
     @FormUrlEncoded
     @POST("user/reporttasklist.html")
-    Observable<BeanList<ComplaintTask>> getComplaintList(@FieldMap Map<String, String> map);
+    Observable<BeanList<ComplaintTask>> getComplaintList(@FieldMap Map<String, Object> map);
+
+    @FormUrlEncoded
+    @POST("/api/mobile/affair/getAffairTaskList")
+    Observable<Bean<TaskInfo>> getAffairTaskList(@FieldMap Map<String, Object> map);
 
     @FormUrlEncoded
     @POST("/api/mobile/user/getAppMenu")

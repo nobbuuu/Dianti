@@ -1,6 +1,5 @@
 package com.qt.dtzf.ui.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,19 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.base.baselib.base.BaseFragment;
 import com.base.baselib.bean.EventMessage;
-import com.base.baselib.bean.LoginInfo;
-import com.base.baselib.bean.MainItem;
 import com.base.baselib.bean.Menu;
-import com.base.baselib.bean.TaskNumber;
 import com.base.baselib.bean.base.Bean;
-import com.base.baselib.glide.GlideUtils;
 import com.base.baselib.model.WorkModel;
 import com.base.baselib.net.DefaultObserver;
-import com.base.baselib.utils.LogUtils;
 import com.base.baselib.utils.SpUtils;
 import com.base.baselib.utils.SpUtilsConstant;
-import com.base.baselib.utils.Utils;
-import com.qt.dtzf.APP;
 import com.qt.dtzf.R;
 import com.qt.dtzf.adapter.HomeAdapter;
 import com.qt.dtzf.ui.DevManagerActivity;
@@ -36,12 +28,9 @@ import com.qt.dtzf.ui.InspectionTaskActivity;
 import com.qt.dtzf.ui.MaintainTaskActivity;
 import com.qt.dtzf.ui.PerformTaskListActivity;
 import com.qt.dtzf.ui.PersonnelFilesActivity;
-import com.qt.dtzf.ui.ReCheckTaskListActivity;
+import com.qt.dtzf.ui.SingleTaskListActivity;
 import com.qt.dtzf.ui.RestoreListActivity;
-import com.qt.dtzf.ui.TaskComplaintListActivity;
 import com.qt.dtzf.ui.TaskListActivity;
-import com.qt.dtzf.ui.TaskMainActivity;
-import com.qt.dtzf.ui.UploadImageActivity;
 import com.qt.dtzf.ui.WebDetailsActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -95,8 +84,6 @@ public class HomeFragment extends BaseFragment {
         RecyclerView mHomeRv = mView.findViewById(R.id.home_rv);
         mHomeRv.setLayoutManager(new GridLayoutManager(getContext(), 6));
         mHomeRv.setAdapter(mAdapter);
-
-
     }
 
     @Override
@@ -161,6 +148,8 @@ public class HomeFragment extends BaseFragment {
                 TaskListActivity.gotoActivity(getActivity(), "2");
                 break;
             case "3":
+                //政务
+                SingleTaskListActivity.gotoActivity(getActivity(), "3");
                 //投诉执法
 //                TaskComplaintListActivity.gotoActivity(getActivity());
                 break;
@@ -170,12 +159,12 @@ public class HomeFragment extends BaseFragment {
                 break;
             case "5":
                 //待复检任务
-                ReCheckTaskListActivity.gotoActivity(getActivity(), "5");
+                SingleTaskListActivity.gotoActivity(getActivity(), "5");
 //                gotoWebActivity(data.getUrl(),"1");
                 break;
             case "6":
                 //已完成任务
-                ReCheckTaskListActivity.gotoActivity(getActivity(), "6");
+                SingleTaskListActivity.gotoActivity(getActivity(), "6");
 //                gotoWebActivity(data.getUrl(),"2");
                 break;
             case "7":

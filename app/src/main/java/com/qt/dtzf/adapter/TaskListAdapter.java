@@ -63,17 +63,26 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         TaskInfo.ListBean item = mInfoList.get(position);
+        int status = item.getStatus();
+        int categoryType = item.getCategoryType();
 //        GlideUtils.loadImageCircleCrop(mContext, "text123", holder.task_item_iv);
         holder.task_item_name_tv.setText(item.getUserNames());
         holder.task_item_phone_tv.setText(item.getUserPhones());
-        Date date = new Date(item.getStartdate() * 1000l);
-        holder.task_item_time_tv.setText(DateFormatUtil.getTime(date, DateFormatUtil.Ymd));
-        holder.task_item_address_tv.setText(item.getDataAddress());
-        holder.task_item_tag_tv.setText(item.getContent());
-        holder.task_company_tv.setText(item.getDataName());
-        int status = item.getStatus();
-        int categoryType = item.getCategoryType();
+        if (categoryType != 0){
+            Date date = new Date(item.getStartdate() * 1000l);
+            holder.task_item_time_tv.setText(DateFormatUtil.getTime(date, DateFormatUtil.Ymd));
+            holder.task_item_address_tv.setText(item.getDataAddress());
+            holder.task_item_tag_tv.setText(item.getContent());
+            holder.task_company_tv.setText(item.getDataName());
+        }
         switch (categoryType) {
+            case 0://政务
+                holder.tasktype_tv.setText(item.getSeTitle());
+                holder.task_item_time_tv.setText(item.getStartDate() + "至" + item.getEndDate());
+                holder.task_item_address_tv.setText(item.getSignAddress());
+                holder.task_item_company_tag.setText("任务标题");
+                holder.task_company_tv.setText(item.getTitle());
+                break;
             case 1://电梯任务（特种任务）
                 holder.tasktype_tv.setText("特种任务");
                 break;
@@ -95,7 +104,11 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
                     holder.taskstatus_tv.setText("待接收");
                     break;
                 case 2://待签到
-                    holder.taskstatus_tv.setText("待签到");
+                    if (categoryType == 0) {
+                        holder.taskstatus_tv.setText("待执行");
+                    } else {
+                        holder.taskstatus_tv.setText("待签到");
+                    }
                     break;
                 case 3://待执行
                 case 4:
@@ -180,7 +193,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
                         break;
                     case 100://通过
                         String url_complete = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + item.getId() + "&taskId=" + item.getTaskId()
-                                + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&isView=1" + "&type=1" + "&qualityType=" + item.getQualityType()+ "&pointType=" + item.getPointType()
+                                + "&otherId=" + SpUtils.getInt(SpUtilsConstant.otherId) + "&isView=1" + "&type=1" + "&qualityType=" + item.getQualityType() + "&pointType=" + item.getPointType()
                                 + "dicName=" + item.getDicName();
                         WebDetailsActivity.gotoActivity(mContext, url_complete);
                         break;
@@ -202,6 +215,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
         public final TextView task_item_phone_tv;
         public final TextView task_item_time_tv;
         public final TextView task_item_address_tv;
+        public final TextView task_item_company_tag;
         public final TextView task_item_tag_tv;
         public final TextView task_company_tv;
         public final TextView taskstatus_tv;
@@ -219,7 +233,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
             task_company_tv = itemView.findViewById(R.id.task_item_company_tv);
             taskstatus_tv = itemView.findViewById(R.id.taskstatus_tv);
             tasktype_tv = itemView.findViewById(R.id.tasktype_tv);
-
+            task_item_company_tag = itemView.findViewById(R.id.task_item_company_tag);
         }
     }
 }

@@ -74,7 +74,7 @@ public class WorkModel {
 
 
     /**
-     * 获取消息列表
+     * 获取任务列表
      *
      * @param taskType      任务类型1是日常监督2是双随机日常监督
      * @param category_type 任务类别1待办任务2复合任务
@@ -86,21 +86,22 @@ public class WorkModel {
         map.put("pageNum", "" + page);
         map.put("pageSize", "" + 5);
         map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
-        if (category_type.equals("1")) {
-            map.put("category_type", category_type);
-            map.put("taskType", taskType);
-            return ApiManager.getInstance().getBaseApi().getTaskInfo(map);
-        } else if (category_type.equals("2")) {
-            map.put("category_type", category_type);
-            map.put("taskType", taskType);
-            return ApiManager.getInstance().getBaseApi().getTaskRecheck(map);
-        } else if (category_type.equals("5")) {//待复检
-            map.put("fromType", "1");
-            return ApiManager.getInstance().getBaseApi().getTaskList(map);
-        } else {//已完成
-            map.put("fromType", "2");
-            return ApiManager.getInstance().getBaseApi().getTaskList(map);
+        switch (category_type) {
+            case "1":
+            case "2":
+                map.put("category_type", category_type);
+                map.put("taskType", taskType);
+                break;
+            case "3":
+                return ApiManager.getInstance().getBaseApi().getAffairTaskList(map);
+            case "5":
+                map.put("fromType", "1");
+                break;
+            default://已完成
+                map.put("fromType", "2");
+                break;
         }
+        return ApiManager.getInstance().getBaseApi().getTaskList(map);
     }
 
     /**
@@ -123,7 +124,7 @@ public class WorkModel {
         map.put("latitude", latitude);
         map.put("signaddress", signaddress);
         map.put("otherId", SpUtils.getInt(SpUtilsConstant.otherId));
-        Log.d("ddd","signdate = " + signdate);
+        Log.d("ddd", "signdate = " + signdate);
         map.put("signdate", signdate);
         map.put("taskId", taskId);
         map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
@@ -339,16 +340,30 @@ public class WorkModel {
 
 
     /**
-     * 获取投诉任务列表
+     * 获取投诉列表
      *
      * @return
      */
     public Observable<BeanList<ComplaintTask>> getComplaintList(int page) {
-        Map<String, String> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
+        map.put("otherId", "" + SpUtils.getInt(SpUtilsConstant.otherId) + "");
         map.put("page", "" + page);
+        map.put("token", "" + SpUtils.getString(SpUtilsConstant.apiKey));
         return ApiManager.getInstance().getBaseApi().getComplaintList(map);
     }
 
+    /**
+     * 获取政务任务列表
+     *
+     * @return
+     */
+    public Observable<Bean<TaskInfo>> getAffairsList(int page) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("otherId", "" + SpUtils.getInt(SpUtilsConstant.otherId) + "");
+        map.put("page", "" + page);
+        map.put("token", "" + SpUtils.getString(SpUtilsConstant.apiKey));
+        return ApiManager.getInstance().getBaseApi().getAffairTaskList(map);
+    }
     /**
      * 获取首页信息返回
      *
