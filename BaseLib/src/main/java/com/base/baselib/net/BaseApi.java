@@ -1,6 +1,7 @@
 package com.base.baselib.net;
 
 
+import com.base.baselib.bean.AffairsTaskDetailBean;
 import com.base.baselib.bean.ChoiceTaskListBean;
 import com.base.baselib.bean.ChoicedBean;
 import com.base.baselib.bean.ComplaintTask;
@@ -113,12 +114,20 @@ public interface BaseApi {
     Observable<Bean<TaskInfoItem>> confirmTask(@FieldMap Map<String, Object> map);
 
     @FormUrlEncoded
+    @POST("/api/mobile/affair/receiveAffairTask")
+    Observable<Bean<TaskInfoItem>> receiveAffairTask(@FieldMap Map<String, Object> map);
+
+    @FormUrlEncoded
     @POST("/api/mobile/task/getTaskDetail")
     Observable<Bean<TaskDetail>> getTaskDetail(@FieldMap Map<String, Object> map);
 
     @FormUrlEncoded
     @POST("/api/mobile/task/getTaskRecheckDetail")
     Observable<Bean<TaskDetail>> getTaskRecheckDetail(@FieldMap Map<String, Object> map);
+
+    @FormUrlEncoded
+    @POST("/api/mobile/affair/getAffairTaskDetail")
+    Observable<Bean<AffairsTaskDetailBean>> getAffairTaskDetail(@FieldMap Map<String, Object> map);
 
     @FormUrlEncoded
     @POST("user/accepttask.html")

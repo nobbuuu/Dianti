@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.base.baselib.AppConstant;
+import com.base.baselib.bean.AffairsTaskDetailBean;
 import com.base.baselib.bean.ChoiceTaskListBean;
 import com.base.baselib.bean.ChoicedBean;
 import com.base.baselib.bean.ComplaintTask;
@@ -12,7 +13,6 @@ import com.base.baselib.bean.DeviceTypeItem;
 import com.base.baselib.bean.ElevatorInfo;
 import com.base.baselib.bean.EmptyBean;
 import com.base.baselib.bean.H5ResultBean;
-import com.base.baselib.bean.HeardInfo;
 import com.base.baselib.bean.ImageUrl;
 import com.base.baselib.bean.ImgBean;
 import com.base.baselib.bean.InspectionTask;
@@ -153,6 +153,19 @@ public class WorkModel {
     }
 
     /**
+     * 任务详情
+     *
+     * @param id
+     * @return
+     */
+    public Observable<Bean<AffairsTaskDetailBean>> getAffairsTaskDetail(String id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
+        return ApiManager.getInstance().getBaseApi().getAffairTaskDetail(map);
+    }
+
+    /**
      * 接受任务
      * <p>
      * uid 	int 	[必须] 监管人员用户id
@@ -212,6 +225,22 @@ public class WorkModel {
         map.put("id", id);
         map.put("taskId", taskId);
         return ApiManager.getInstance().getBaseApi().confirmTask(map);
+    }
+
+    /**
+     * 政务确认
+     *
+     * @param taskId
+     * @param id
+     * @return
+     */
+    public Observable<Bean<TaskInfoItem>> receiveAffairTask(String id, String taskId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
+        map.put(SpUtilsConstant.otherId, SpUtils.getInt(SpUtilsConstant.otherId));
+        map.put("id", id);
+        map.put("taskId", taskId);
+        return ApiManager.getInstance().getBaseApi().receiveAffairTask(map);
     }
 
 

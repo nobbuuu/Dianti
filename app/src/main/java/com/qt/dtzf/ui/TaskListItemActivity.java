@@ -12,22 +12,19 @@ import android.widget.Toast;
 import com.base.baselib.base.BaseActivity;
 import com.base.baselib.base.ErrorFragment;
 import com.base.baselib.bean.TaskDetail;
-import com.base.baselib.bean.TaskElevator;
 import com.base.baselib.bean.TaskInfo;
 import com.base.baselib.bean.TaskInfoItem;
 import com.base.baselib.bean.base.Bean;
-import com.base.baselib.bean.base.BeanList;
 import com.base.baselib.model.WorkModel;
 import com.base.baselib.net.DefaultObserver;
 import com.qt.dtzf.R;
+import com.base.baselib.bean.AffairsTaskDetailBean;
 import com.qt.dtzf.utils.DateFormatUtil;
 import com.qt.dtzf.utils.ToastUtils;
 
 import androidx.annotation.Nullable;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -44,6 +41,7 @@ public class TaskListItemActivity extends BaseActivity {
     private TextView mTimeTv;
     private TextView mAddressTv;
     private TextView mNumberTv;
+    private TextView mTypeTv;
     private TextView mDevTv;
     private TextView mCheckTv;
     private TextView mCheckBasicTv;
@@ -77,6 +75,7 @@ public class TaskListItemActivity extends BaseActivity {
         mTimeTv = findViewById(R.id.sampling_task_day_tv);
         mAddressTv = findViewById(R.id.sampling_task_address_tv);
         mNumberTv = findViewById(R.id.sampling_task_number_tv);
+        mTypeTv = findViewById(R.id.sampling_task_dev_title_tv);
         mDevTv = findViewById(R.id.sampling_task_dev_tv);
         mCheckTv = findViewById(R.id.sampling_task_check_tv);
         mCheckBasicTv = findViewById(R.id.sampling_task_basis_tv);
@@ -90,30 +89,34 @@ public class TaskListItemActivity extends BaseActivity {
     }
 
     private void getData() {
-        Observable<Bean<TaskDetail>> detail = WorkModel.getInstance().getTaskDetail(mTaskInfo.getId(), mTaskInfo.getTaskId(), mTaskInfo.getQualityType());
-        showWaitFragment();
-        detail.compose(this.bindToLifecycle())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<Bean<TaskDetail>>() {
-                    @Override
-                    public void onSuccess(Bean<TaskDetail> taskDetailBean) {
-                        hideErrorView();
-                        setData();
-                    }
+        if (mTaskInfo.getQualityType() != 0){
+            Observable<Bean<TaskDetail>> detail = WorkModel.getInstance().getTaskDetail(mTaskInfo.getId(), mTaskInfo.getTaskId(), mTaskInfo.getQualityType());
+            showWaitFragment();
+            detail.compose(this.bindToLifecycle())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new DefaultObserver<Bean<TaskDetail>>() {
+                        @Override
+                        public void onSuccess(Bean<TaskDetail> taskDetailBean) {
+                            hideErrorView();
+                            setData();
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                        showErrorView(mRefreshListener);
-                    }
+                        @Override
+                        public void onError(Throwable e) {
+                            super.onError(e);
+                            showErrorView(mRefreshListener);
+                        }
 
-                    @Override
-                    public void onFail(String code, String msg) {
-                        super.onFail(code, msg);
-                        showErrorView(mRefreshListener);
-                    }
-                });
+                        @Override
+                        public void onFail(String code, String msg) {
+                            super.onFail(code, msg);
+                            showErrorView(mRefreshListener);
+                        }
+                    });
+        }else {
+            refreshAffairsData();
+        }
 
     }
 
@@ -159,6 +162,16 @@ public class TaskListItemActivity extends BaseActivity {
         }*/
         mNumberTv.setText(num + "台");
         mDevTv.setText(mTaskInfo.getDataName());
+        mCheckTv.setText(mTaskInfo.getContent());
+    }
+
+    private void refreshAffairsData() {
+        if (mTaskInfo == null) return;
+        mNameTv.setText(mTaskInfo.getUserNames());
+        mTimeTv.setText(mTaskInfo.getStartDate() + "至" + mTaskInfo.getEndDate());
+        mAddressTv.setText(mTaskInfo.getSignAddress());
+        mTypeTv.setText("任务标题");
+        mDevTv.setText(mTaskInfo.getTitle());
         mCheckTv.setText(mTaskInfo.getContent());
     }
 
