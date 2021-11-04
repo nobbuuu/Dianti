@@ -228,6 +228,18 @@ public class WorkModel {
     }
 
     /**
+     *收到任务 立即执行
+     * @param id
+     * @return
+     */
+    public Observable<Bean<TaskInfoItem>> confirmAffairsTask(String id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
+        return ApiManager.getInstance().getBaseApi().receiveAffairTask(map);
+    }
+
+    /**
      * 政务确认
      *
      * @param taskId

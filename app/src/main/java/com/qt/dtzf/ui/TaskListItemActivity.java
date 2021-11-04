@@ -121,14 +121,23 @@ public class TaskListItemActivity extends BaseActivity {
     }
 
     private void confirmTask() {
-        Observable<Bean<TaskInfoItem>> detail = WorkModel.getInstance().confirmTask(mTaskInfo.getId(), mTaskInfo.getTaskId());
+        Observable<Bean<TaskInfoItem>> detail = null;
+        if (mTaskInfo.getQualityType() != 0){
+            detail = WorkModel.getInstance().confirmTask(mTaskInfo.getId(), mTaskInfo.getTaskId());
+        }else {
+            detail = WorkModel.getInstance().confirmAffairsTask(mTaskInfo.getId());
+        }
         detail.compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DefaultObserver<Bean<TaskInfoItem>>() {
                     @Override
                     public void onSuccess(Bean<TaskInfoItem> taskDetailBean) {
-                        TaskSignInActivity.gotoActivity(TaskListItemActivity.this, mTaskInfo);
+                        if (mTaskInfo.getQualityType() != 0){
+                            TaskSignInActivity.gotoActivity(TaskListItemActivity.this, mTaskInfo);
+                        }else {
+                            PerformAffairsActivity.gotoActivity(TaskListItemActivity.this, mTaskInfo);
+                        }
                     }
 
                     @Override
