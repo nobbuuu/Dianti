@@ -4,11 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationListener;
+import com.base.baselib.BaseAPP;
 import com.base.baselib.base.BaseActivity;
 import com.base.baselib.base.ErrorFragment;
 import com.base.baselib.bean.TaskDetail;
@@ -17,6 +21,8 @@ import com.base.baselib.bean.TaskInfoItem;
 import com.base.baselib.bean.base.Bean;
 import com.base.baselib.model.WorkModel;
 import com.base.baselib.net.DefaultObserver;
+import com.base.baselib.utils.LogUtils;
+import com.base.baselib.utils.MapHelper;
 import com.qt.dtzf.R;
 import com.base.baselib.bean.AffairsTaskDetailBean;
 import com.qt.dtzf.utils.DateFormatUtil;
@@ -47,6 +53,8 @@ public class TaskListItemActivity extends BaseActivity {
     private TextView mCheckBasicTv;
 
     private TaskInfo.ListBean mTaskInfo;
+    private double mLatitude = 29.515467;
+    private double mLongitude = 106.521165;
 
     public static void gotoActivity(Activity activity, TaskInfo.ListBean item) {
         Intent intent = new Intent(activity, TaskListItemActivity.class);
@@ -117,15 +125,30 @@ public class TaskListItemActivity extends BaseActivity {
         }else {
             refreshAffairsData();
         }
-
+        getLocation();
     }
+
+    private void getLocation() {
+        BaseAPP.getLocationUtils().addLocationListener(mLocationListener);
+        BaseAPP.getLocationUtils().startLocation();
+    }
+
+    AMapLocationListener mLocationListener = new AMapLocationListener() {
+        @Override
+        public void onLocationChanged(AMapLocation aMapLocation) {
+            if (aMapLocation.getErrorCode() == 0) {
+                mLatitude = aMapLocation.getLatitude();
+                mLongitude = aMapLocation.getLongitude();
+            }
+        }
+    };
 
     private void confirmTask() {
         Observable<Bean<TaskInfoItem>> detail = null;
         if (mTaskInfo.getQualityType() != 0){
             detail = WorkModel.getInstance().confirmTask(mTaskInfo.getId(), mTaskInfo.getTaskId());
         }else {
-            detail = WorkModel.getInstance().confirmAffairsTask(mTaskInfo.getId());
+            detail = WorkModel.getInstance().confirmAffairsTask(mTaskInfo.getId(),String.valueOf(mLatitude),String.valueOf(mLongitude));
         }
         detail.compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())

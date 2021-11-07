@@ -53,6 +53,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,6 +125,16 @@ public class UploadImageActivity extends BaseActivity {
                 dataList.addAll(originList);
                 mAdapter.addImageList(dataList, false, isCheckBasis);
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (isUploadAll) {
+            upAllImgFiles();
+        } else {
+            ToastUtils.Toast_long("上传图片中 ，请稍候重试");
         }
     }
 
@@ -219,6 +230,7 @@ public class UploadImageActivity extends BaseActivity {
         String taskId = getIntent().getStringExtra("taskId");
         showWaitDialog();
         Observable<Bean<EmptyBean>> observable = WorkModel.getInstance().saveXCQZImg(taskId, imgUrls);
+        String finalImgUrls = imgUrls;
         observable.compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -226,6 +238,9 @@ public class UploadImageActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Bean<EmptyBean> bean) {
                         ToastUtils.Toast_long("提交成功");
+                        Intent intent = getIntent();
+                        intent.putExtra("imgList", new Gson().toJson(mList));
+                        setResult(117,intent);
                         finish();
                     }
 

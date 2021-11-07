@@ -126,7 +126,7 @@ public class AlbumActivity extends BaseActivity {
         }).toList().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe((appImages, throwable) -> {
                     hideWaitDialog();
-                    Collections.sort(appImages, new FileComparator());
+//                    Collections.sort(appImages, new FileComparator());
                     mAdapter.setData(appImages);
                 });
     }

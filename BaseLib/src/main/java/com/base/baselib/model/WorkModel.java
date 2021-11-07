@@ -232,9 +232,12 @@ public class WorkModel {
      * @param id
      * @return
      */
-    public Observable<Bean<TaskInfoItem>> confirmAffairsTask(String id) {
+    public Observable<Bean<TaskInfoItem>> confirmAffairsTask(String id,String dataLatitude,String dataLongitude) {
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
+        map.put("dataLatitude", dataLatitude);
+        map.put("dataLongitude", dataLongitude);
+        map.put("dataAddress", "深圳市宝安区瓦窑花园");
         map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
         return ApiManager.getInstance().getBaseApi().receiveAffairTask(map);
     }
