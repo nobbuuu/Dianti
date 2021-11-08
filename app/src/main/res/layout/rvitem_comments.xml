@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <com.ruffian.library.widget.RImageView
+                android:id="@+id/avatarIv"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/avater"
+                app:is_circle="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/titleName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                app:layout_constraintBottom_toTopOf="@+id/phoneTv"
+                app:layout_constraintStart_toEndOf="@+id/avatarIv"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                tools:text="颠三倒四" />
+
+            <TextView
+                android:id="@+id/phoneTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/avatarIv"
+                app:layout_constraintStart_toEndOf="@+id/avatarIv"
+                app:layout_constraintTop_toBottomOf="@+id/titleName"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                tools:text="18277750576" />
+            <TextView
+                android:id="@+id/comentsTv"
+                android:layout_width="wrap_content"
+                android:text="搞好了吗圣诞节发的坡国际打算复读"
+                app:layout_constraintTop_toBottomOf="@+id/avatarIv"
+                android:layout_marginTop="22dp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+               android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/replyTv"
+                android:layout_width="wrap_content"
+                android:text="回复"
+                android:textColor="@color/color_main_blue"
+                app:layout_constraintTop_toBottomOf="@+id/comentsTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

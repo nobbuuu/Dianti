@@ -7,6 +7,7 @@ import com.base.baselib.AppConstant;
 import com.base.baselib.bean.AffairsTaskDetailBean;
 import com.base.baselib.bean.ChoiceTaskListBean;
 import com.base.baselib.bean.ChoicedBean;
+import com.base.baselib.bean.CommentsBean;
 import com.base.baselib.bean.ComplaintTask;
 import com.base.baselib.bean.DevManagerBean;
 import com.base.baselib.bean.DeviceTypeItem;
@@ -273,6 +274,37 @@ public class WorkModel {
         map.put("id", id);
         map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
         return ApiManager.getInstance().getBaseApi().getAffairPointList(map);
+    }
+
+    /**
+     *获取评论列表
+     * @param id
+     * @return
+     */
+    public Observable<BeanList<CommentsBean>> getAffairCommentList(String id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("taskId", id);
+        map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
+        return ApiManager.getInstance().getBaseApi().getAffairCommentList(map);
+    }
+
+    /**
+     *提交评论
+     * @param id      任务ID
+     * @param content 问题描述
+     * @param replyId 一楼帖子=0，回复别人取上级评论的id
+     * @param contentPic 问题描述图片,多图片用逗号分割
+     * @return
+     */
+    public Observable<Bean<HistotyBean>> submitAffairComment(String id,String content,String replyId,String contentPic) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("taskDistributeId", id);
+        map.put("content", content);
+        map.put("replyId", replyId);
+        map.put("uid", SpUtils.getInt(SpUtilsConstant.otherId));
+        map.put("contentPic", contentPic);
+        map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
+        return ApiManager.getInstance().getBaseApi().submitAffairComment(map);
     }
 
     /**

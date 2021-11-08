@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <com.ruffian.library.widget.RImageView
+        android:id="@+id/avatarIv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/avater"
+        app:is_circle="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titleName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@+id/phoneTv"
+        app:layout_constraintStart_toEndOf="@+id/avatarIv"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="颠三倒四" />
+
+    <TextView
+        android:id="@+id/phoneTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/avatarIv"
+        app:layout_constraintStart_toEndOf="@+id/avatarIv"
+        app:layout_constraintTop_toBottomOf="@+id/titleName"
+        tools:text="18277750576" />
+
+    <TextView
+        android:id="@+id/comentsTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="搞好了吗圣诞节发的坡国际打算复读"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avatarIv" />
+
+    <TextView
+        android:id="@+id/replyTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="回复"
+        android:textColor="@color/color_main_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comentsTv" />
+</androidx.constraintlayout.widget.ConstraintLayout>

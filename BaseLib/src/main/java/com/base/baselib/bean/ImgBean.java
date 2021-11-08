@@ -11,6 +11,10 @@ public class ImgBean implements Serializable {
     }
     public ImgBean() {
     }
+    public ImgBean(String filePath,String imgUrl) {
+        this.filePath = filePath;
+        this.imgUrl = imgUrl;
+    }
 
     public String getFilePath() {
         return filePath;

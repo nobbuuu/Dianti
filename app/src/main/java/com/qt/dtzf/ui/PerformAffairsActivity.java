@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -22,7 +23,7 @@ import com.base.baselib.bean.TaskInfo;
 import com.base.baselib.bean.base.Bean;
 import com.base.baselib.model.WorkModel;
 import com.base.baselib.net.DefaultObserver;
-import com.base.baselib.view.TitleView;
+import com.blankj.utilcode.util.BarUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.qt.dtzf.R;
@@ -37,6 +38,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -48,8 +50,6 @@ import static com.qt.dtzf.ui.TaskMainActivity.ImageRequestCode;
  */
 public class PerformAffairsActivity extends BaseActivity {
 
-    @BindView(R.id.task_list_title)
-    TitleView taskListTitle;
     @BindView(R.id.uploadImgLay)
     CardView uploadImgLay;
     @BindView(R.id.taskTitle)
@@ -64,6 +64,20 @@ public class PerformAffairsActivity extends BaseActivity {
     RecyclerView uploadHisRv;
     @BindView(R.id.commitTv)
     TextView commitTv;
+    @BindView(R.id.backIv)
+    ImageView backIv;
+    @BindView(R.id.title_tv)
+    TextView titleTv;
+    @BindView(R.id.completeTv)
+    TextView completeTv;
+    @BindView(R.id.cameraIcon)
+    ImageView cameraIcon;
+    @BindView(R.id.qustionIv)
+    ImageView qustionIv;
+    @BindView(R.id.countTv)
+    TextView countTv;
+    @BindView(R.id.titleBar)
+    ConstraintLayout titleBar;
     private TaskInfo.ListBean mTaskInfo;
     private String imgUrls = "";
 
@@ -78,9 +92,13 @@ public class PerformAffairsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perform_task);
         ButterKnife.bind(this);
+        titleBar.setPadding(0, BarUtils.getStatusBarHeight(),0,0);
         mTaskInfo = (TaskInfo.ListBean) getIntent().getSerializableExtra("taskInfoBean");
+        if (mTaskInfo == null){
+            ToastUtils.Toast_long("数据异常");
+            finish();
+        }
         uploadImgLay = findViewById(R.id.uploadImgLay);
-        onevent();
         getData();
     }
 
@@ -94,12 +112,19 @@ public class PerformAffairsActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Bean<HistotyBean> bean) {
                         List<HistotyBean.ListBean> list = bean.data.getList();
-                        if (list!=null && list.size()>0){
+                        if (list != null && list.size() > 0) {
                             List<HistotyBean.ListBean.PointListBean> pointList = list.get(0).getPointList();
-                            if (pointList != null && pointList.size() > 0){
+                            if (pointList != null && pointList.size() > 0) {
                                 PerformHistoryAdapter adapter = new PerformHistoryAdapter(PerformAffairsActivity.this, pointList, R.layout.rvitem_affairs_history);
                                 uploadHisRv.setAdapter(adapter);
                             }
+                        }
+                        int totalCount = bean.data.getTotalCount();
+                        if (totalCount != 0){
+                            countTv.setVisibility(View.VISIBLE);
+                            countTv.setText(totalCount+"");
+                        }else {
+                            countTv.setVisibility(View.GONE);
                         }
                     }
 
@@ -111,41 +136,14 @@ public class PerformAffairsActivity extends BaseActivity {
                 });
     }
 
-    private void onevent() {
-        uploadImgLay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toImageListForActivity();
-            }
-        });
-        commitTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                commitTask();
-            }
-        });
-
-        taskListTitle.mTitleRightTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new ConfirmTaskDialog(PerformAffairsActivity.this, new ActionCallback() {
-                    @Override
-                    public void onAction() {
-                        confirmAffairTask();
-                    }
-                }).show();
-            }
-        });
-    }
-
     private void commitTask() {
         String inputStr = inputEdt.getText().toString();
-        if (imgUrls.isEmpty()){
+        if (imgUrls.isEmpty()) {
             ToastUtils.Toast_long("请先上传现场照片");
             return;
         }
         Observable<Bean<EmptyBean>> detail = WorkModel.getInstance()
-                .submitAffairPoint(mTaskInfo.getId(),inputStr,imgUrls,"");
+                .submitAffairPoint(mTaskInfo.getId(), inputStr, imgUrls, "");
         detail.compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -163,6 +161,7 @@ public class PerformAffairsActivity extends BaseActivity {
                 });
 
     }
+
     private void confirmAffairTask() {
         Observable<Bean<EmptyBean>> detail = WorkModel.getInstance()
                 .confirmAffairTask(mTaskInfo.getId());
@@ -199,14 +198,40 @@ public class PerformAffairsActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 117 && data != null) {
-
             imgUrls = data.getStringExtra("imgList");
-            List<ImgBean> mList = new Gson().fromJson(imgUrls, new TypeToken<List<ImgBean>>(){}.getType());
+            List<ImgBean> mList = new Gson().fromJson(imgUrls, new TypeToken<List<ImgBean>>() {
+            }.getType());
             if (mList != null) {
-                imgRv.setLayoutManager(new StaggeredGridLayoutManager(3,RecyclerView.VERTICAL));
-                imgRv.addItemDecoration(new WaterFallItemDecoration(30,30));
-                imgRv.setAdapter(new PerformImgAdapter(this,mList,R.layout.rvitem_onlyimg));
+                imgRv.setLayoutManager(new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL));
+                imgRv.addItemDecoration(new WaterFallItemDecoration(30, 30));
+                imgRv.setAdapter(new PerformImgAdapter(this, mList, R.layout.rvitem_onlyimg));
             }
+        }
+    }
+
+    @OnClick({R.id.backIv, R.id.completeTv, R.id.uploadImgLay, R.id.commitTv,R.id.qustionIv})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.backIv:
+                finish();
+                break;
+            case R.id.completeTv:
+                new ConfirmTaskDialog(PerformAffairsActivity.this, new ActionCallback() {
+                    @Override
+                    public void onAction() {
+                        confirmAffairTask();
+                    }
+                }).show();
+                break;
+            case R.id.uploadImgLay:
+                toImageListForActivity();
+                break;
+            case R.id.commitTv:
+                commitTask();
+                break;
+            case R.id.qustionIv:
+                FeedBackActivity.gotoActivity(this,mTaskInfo.getTaskId());
+                break;
         }
     }
 }

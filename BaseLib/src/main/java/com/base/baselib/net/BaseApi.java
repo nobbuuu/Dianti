@@ -4,6 +4,7 @@ package com.base.baselib.net;
 import com.base.baselib.bean.AffairsTaskDetailBean;
 import com.base.baselib.bean.ChoiceTaskListBean;
 import com.base.baselib.bean.ChoicedBean;
+import com.base.baselib.bean.CommentsBean;
 import com.base.baselib.bean.ComplaintTask;
 import com.base.baselib.bean.DevManagerBean;
 import com.base.baselib.bean.DeviceTypeItem;
@@ -125,6 +126,14 @@ public interface BaseApi {
     @FormUrlEncoded
     @POST("/api/mobile/affair/getAffairPointList")
     Observable<Bean<HistotyBean>> getAffairPointList(@FieldMap Map<String, Object> map);
+
+    @FormUrlEncoded
+    @POST("/api/mobile/affair/getAffairCommentList")
+    Observable<BeanList<CommentsBean>> getAffairCommentList(@FieldMap Map<String, Object> map);
+
+    @FormUrlEncoded
+    @POST("/api/mobile/affair/submitAffairComment")
+    Observable<Bean<HistotyBean>> submitAffairComment(@FieldMap Map<String, Object> map);
 
     @FormUrlEncoded
     @POST("/api/mobile/affair/confirmAffairTask")
