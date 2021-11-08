@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -46,7 +47,7 @@ import static com.qt.dtzf.ui.TaskMainActivity.ImageRequestCode;
 /**
  * Create By s on
  */
-public class PerformAffairsActivity extends BaseActivity {
+public class FeedBackActivity extends BaseActivity {
 
     @BindView(R.id.task_list_title)
     TitleView taskListTitle;
@@ -64,11 +65,14 @@ public class PerformAffairsActivity extends BaseActivity {
     RecyclerView uploadHisRv;
     @BindView(R.id.commitTv)
     TextView commitTv;
+    @BindView(R.id.cameraIcon)
+    ImageView cameraIcon;
+
     private TaskInfo.ListBean mTaskInfo;
     private String imgUrls = "";
 
     public static void gotoActivity(Activity activity, TaskInfo.ListBean taskInfoBean) {
-        Intent intent = new Intent(activity, PerformAffairsActivity.class);
+        Intent intent = new Intent(activity, FeedBackActivity.class);
         intent.putExtra("taskInfoBean", taskInfoBean);
         activity.startActivity(intent);
     }
@@ -97,7 +101,7 @@ public class PerformAffairsActivity extends BaseActivity {
                         if (list!=null && list.size()>0){
                             List<HistotyBean.ListBean.PointListBean> pointList = list.get(0).getPointList();
                             if (pointList != null && pointList.size() > 0){
-                                PerformHistoryAdapter adapter = new PerformHistoryAdapter(PerformAffairsActivity.this, pointList, R.layout.rvitem_affairs_history);
+                                PerformHistoryAdapter adapter = new PerformHistoryAdapter(FeedBackActivity.this, pointList, R.layout.rvitem_affairs_history);
                                 uploadHisRv.setAdapter(adapter);
                             }
                         }
@@ -128,7 +132,7 @@ public class PerformAffairsActivity extends BaseActivity {
         taskListTitle.mTitleRightTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new ConfirmTaskDialog(PerformAffairsActivity.this, new ActionCallback() {
+                new ConfirmTaskDialog(FeedBackActivity.this, new ActionCallback() {
                     @Override
                     public void onAction() {
                         confirmAffairTask();

@@ -1,116 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:orientation="vertical">
+
     <com.base.baselib.view.TitleView
         android:id="@+id/task_list_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:contentInsetStart="0dp"
         app:layout_collapseMode="pin"
-        app:textTitle="执行任务"
         app:textRight="完成任务"
+        app:textTitle="执行任务"
+        app:showRight="true"
         tools:ignore="MissingConstraints" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/uploadImgLay"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        app:cardCornerRadius="10dp"
-        android:layout_height="wrap_content">
+        app:cardCornerRadius="10dp">
+
         <TextView
             android:layout_width="wrap_content"
-            android:text="上传照片"
-            android:textColor="@color/text_norm_black"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="18dp"
             android:layout_marginBottom="18dp"
-            android:drawablePadding="10dp"
-            android:layout_marginStart="8dp"
             android:drawableStart="@mipmap/carmen_icon"
-            android:layout_height="wrap_content"/>
+            android:drawablePadding="10dp"
+            android:text="上传照片"
+            android:textColor="@color/text_norm_black" />
+
         <ImageView
             android:layout_width="wrap_content"
+            android:layout_height="12dp"
             android:layout_gravity="end|center_vertical"
             android:layout_marginEnd="12dp"
-            android:src="@mipmap/jinru_icon"
-            android:layout_height="12dp"/>
+            android:src="@mipmap/jinru_icon" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        app:cardCornerRadius="10dp"
-        android:layout_height="wrap_content">
+        app:cardCornerRadius="10dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:padding="6dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:layout_height="wrap_content">
+            android:padding="6dp">
+
             <TextView
                 android:id="@+id/taskTitle"
                 android:layout_width="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:text="任务描述"
-                android:textColor="@color/text_norm_black"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="6dp"
                 android:drawableStart="@mipmap/editicon"
                 android:drawablePadding="8dp"
                 android:gravity="center"
+                android:text="任务描述"
+                android:textColor="@color/text_norm_black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/cameraIcon"
+                android:layout_width="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@mipmap/carmen_icon"
+                android:layout_marginEnd="4dp"
                 android:layout_marginTop="6dp"
-                android:layout_marginStart="4dp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/editLay"
                 android:layout_width="match_parent"
-                app:layout_constraintTop_toBottomOf="@+id/taskTitle"
-                android:layout_marginTop="10dp"
+                android:layout_height="240dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="6dp"
                 android:background="@drawable/shape_dotted_line"
-                android:layout_height="300dp">
+                app:layout_constraintTop_toBottomOf="@+id/taskTitle">
 
                 <EditText
                     android:id="@+id/inputEdt"
                     android:layout_width="match_parent"
-                    android:hint="请输入..."
-                    android:textSize="14sp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:background="@null"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:hint="请输入..."
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_height="wrap_content"/>
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/imgRv"
                     android:layout_width="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_height="wrap_content"/>
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <TextView
+                android:id="@+id/commitTv"
                 android:layout_width="wrap_content"
-                android:text="提交"
-                app:layout_constraintTop_toBottomOf="@+id/editLay"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="20dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:textColor="@color/white"
+                android:layout_marginEnd="6dp"
                 android:background="#B6DBF8"
                 android:paddingStart="12dp"
                 android:paddingTop="4dp"
-                android:paddingBottom="4dp"
                 android:paddingEnd="12dp"
-                android:layout_height="wrap_content"/>
+                android:paddingBottom="4dp"
+                android:text="提交"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editLay" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/uploadHisRv"
         android:layout_width="match_parent"
-        android:layout_marginTop="12dp"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="12dp" />
 </LinearLayout>

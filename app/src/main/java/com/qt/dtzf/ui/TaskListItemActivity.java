@@ -160,6 +160,7 @@ public class TaskListItemActivity extends BaseActivity {
                             TaskSignInActivity.gotoActivity(TaskListItemActivity.this, mTaskInfo);
                         }else {
                             PerformAffairsActivity.gotoActivity(TaskListItemActivity.this, mTaskInfo);
+                            finish();
                         }
                     }
 

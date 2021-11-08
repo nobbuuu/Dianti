@@ -13,6 +13,7 @@ import com.base.baselib.bean.DeviceTypeItem;
 import com.base.baselib.bean.ElevatorInfo;
 import com.base.baselib.bean.EmptyBean;
 import com.base.baselib.bean.H5ResultBean;
+import com.base.baselib.bean.HistotyBean;
 import com.base.baselib.bean.ImageUrl;
 import com.base.baselib.bean.ImgBean;
 import com.base.baselib.bean.InspectionTask;
@@ -228,6 +229,26 @@ public class WorkModel {
     }
 
     /**
+     * 提交政务
+     *
+     * @param id        任务ID
+     * @param checkData 任务描述
+     * @param xcqzImg 	现场取证图片集合
+     * @param xcqzVideo 现场取证视频集合
+     * @return
+     */
+    public Observable<Bean<EmptyBean>> submitAffairPoint(String id,String checkData,String xcqzImg,String xcqzVideo) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
+        map.put(SpUtilsConstant.otherId, SpUtils.getInt(SpUtilsConstant.otherId));
+        map.put("id", id);
+        map.put("checkData", checkData);
+        map.put("xcqzImg", xcqzImg);
+        map.put("xcqzVideo", xcqzVideo);
+        return ApiManager.getInstance().getBaseApi().submitAffairPoint(map);
+    }
+
+    /**
      *收到任务 立即执行
      * @param id
      * @return
@@ -240,6 +261,18 @@ public class WorkModel {
         map.put("dataAddress", "深圳市宝安区瓦窑花园");
         map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
         return ApiManager.getInstance().getBaseApi().receiveAffairTask(map);
+    }
+
+    /**
+     *获取已经提交的政务过程列表
+     * @param id
+     * @return
+     */
+    public Observable<Bean<HistotyBean>> getAffairPointList(String id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
+        return ApiManager.getInstance().getBaseApi().getAffairPointList(map);
     }
 
     /**
@@ -256,6 +289,19 @@ public class WorkModel {
         map.put("id", id);
         map.put("taskId", taskId);
         return ApiManager.getInstance().getBaseApi().receiveAffairTask(map);
+    }
+
+    /**
+     * 政务:完成任务
+     *
+     * @param id
+     * @return
+     */
+    public Observable<Bean<EmptyBean>> confirmAffairTask(String id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
+        map.put("id", id);
+        return ApiManager.getInstance().getBaseApi().confirmAffairTask(map);
     }
 
 

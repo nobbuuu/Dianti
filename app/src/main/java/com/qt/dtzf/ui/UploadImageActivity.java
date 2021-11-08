@@ -1,6 +1,7 @@
 package com.qt.dtzf.ui;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -33,6 +34,7 @@ import com.base.baselib.bean.EmptyBean;
 import com.base.baselib.bean.H5ResultBean;
 import com.base.baselib.bean.ImageUrl;
 import com.base.baselib.bean.ImgBean;
+import com.base.baselib.bean.TaskInfo;
 import com.base.baselib.bean.base.Bean;
 import com.base.baselib.bean.base.BeanList;
 import com.base.baselib.model.WorkModel;
@@ -75,6 +77,12 @@ public class UploadImageActivity extends BaseActivity {
     private AppCompatButton uploadImageBtn;
 
     private TitleView mTitleView;
+    private int fromTag;
+    public static void gotoActivity(Activity activity, int fromTag) {
+        Intent intent = new Intent(activity, UploadImageActivity.class);
+        intent.putExtra("fromTag", fromTag);
+        activity.startActivity(intent);
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +105,7 @@ public class UploadImageActivity extends BaseActivity {
 
         uploadImageBtn.setOnClickListener(mClickListener);
         mImges = getIntent().getStringExtra("xcqzImg");
+        fromTag = getIntent().getIntExtra("fromTag",0);
         isCheckBasis = getIntent().getBooleanExtra("checkBasis", false);
         if (isCheckBasis) {
             uploadImageBtn.setVisibility(View.GONE);
@@ -125,16 +134,6 @@ public class UploadImageActivity extends BaseActivity {
                 dataList.addAll(originList);
                 mAdapter.addImageList(dataList, false, isCheckBasis);
             }
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if (isUploadAll) {
-            upAllImgFiles();
-        } else {
-            ToastUtils.Toast_long("上传图片中 ，请稍候重试");
         }
     }
 
@@ -216,46 +215,50 @@ public class UploadImageActivity extends BaseActivity {
 
     private void upAllImgFiles() {
         mList = mAdapter.getImageList();
-        StringBuffer buffer = new StringBuffer();
-        for (int i = 0; i < mList.size(); i++) {
-            String imgUrl = mList.get(i).getImgUrl();
-            if (!TextUtils.isEmpty(imgUrl)) {
-                buffer.append(imgUrl + ",");
+        if (fromTag == 2){
+            Intent intent = getIntent();
+            intent.putExtra("imgList", new Gson().toJson(mList));
+            setResult(117,intent);
+            finish();
+        }else {
+            StringBuffer buffer = new StringBuffer();
+            for (int i = 0; i < mList.size(); i++) {
+                String imgUrl = mList.get(i).getImgUrl();
+                if (!TextUtils.isEmpty(imgUrl)) {
+                    buffer.append(imgUrl + ",");
+                }
             }
-        }
-        String imgUrls = buffer.toString();
-        if (!TextUtils.isEmpty(imgUrls)) {
-            imgUrls = imgUrls.substring(0, imgUrls.lastIndexOf(","));
-        }
-        String taskId = getIntent().getStringExtra("taskId");
-        showWaitDialog();
-        Observable<Bean<EmptyBean>> observable = WorkModel.getInstance().saveXCQZImg(taskId, imgUrls);
-        String finalImgUrls = imgUrls;
-        observable.compose(this.bindToLifecycle())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<Bean<EmptyBean>>() {
-                    @Override
-                    public void onSuccess(Bean<EmptyBean> bean) {
-                        ToastUtils.Toast_long("提交成功");
-                        Intent intent = getIntent();
-                        intent.putExtra("imgList", new Gson().toJson(mList));
-                        setResult(117,intent);
-                        finish();
-                    }
+            String imgUrls = buffer.toString();
+            if (!TextUtils.isEmpty(imgUrls)) {
+                imgUrls = imgUrls.substring(0, imgUrls.lastIndexOf(","));
+            }
+            String taskId = getIntent().getStringExtra("taskId");
+            showWaitDialog();
+            Observable<Bean<EmptyBean>> observable = WorkModel.getInstance().saveXCQZImg(taskId, imgUrls);
+            String finalImgUrls = imgUrls;
+            observable.compose(this.bindToLifecycle())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new DefaultObserver<Bean<EmptyBean>>() {
+                        @Override
+                        public void onSuccess(Bean<EmptyBean> bean) {
+                            ToastUtils.Toast_long("提交成功");
+                            finish();
+                        }
 
-                    @Override
-                    public void onFail(String code, String msg) {
-                        super.onFail(code, msg);
-                        hideWaitDialog();
-                    }
+                        @Override
+                        public void onFail(String code, String msg) {
+                            super.onFail(code, msg);
+                            hideWaitDialog();
+                        }
 
-                    @Override
-                    public void onStop() {
-                        super.onStop();
-                        hideWaitDialog();
-                    }
-                });
+                        @Override
+                        public void onStop() {
+                            super.onStop();
+                            hideWaitDialog();
+                        }
+                    });
+        }
     }
 
     private void upImages() {

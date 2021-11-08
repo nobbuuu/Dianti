@@ -10,6 +10,7 @@ import com.base.baselib.bean.DeviceTypeItem;
 import com.base.baselib.bean.ElevatorInfo;
 import com.base.baselib.bean.EmptyBean;
 import com.base.baselib.bean.H5ResultBean;
+import com.base.baselib.bean.HistotyBean;
 import com.base.baselib.bean.InspectionTask;
 import com.base.baselib.bean.LoginBean;
 import com.base.baselib.bean.MaintainTask;
@@ -114,8 +115,20 @@ public interface BaseApi {
     Observable<Bean<TaskInfoItem>> confirmTask(@FieldMap Map<String, Object> map);
 
     @FormUrlEncoded
+    @POST("/api/mobile/affair/submitAffairPoint")//政务: 提交图片或者任务描述
+    Observable<Bean<EmptyBean>> submitAffairPoint(@FieldMap Map<String, Object> map);
+
+    @FormUrlEncoded
     @POST("/api/mobile/affair/receiveAffairTask")
     Observable<Bean<TaskInfoItem>> receiveAffairTask(@FieldMap Map<String, Object> map);
+
+    @FormUrlEncoded
+    @POST("/api/mobile/affair/getAffairPointList")
+    Observable<Bean<HistotyBean>> getAffairPointList(@FieldMap Map<String, Object> map);
+
+    @FormUrlEncoded
+    @POST("/api/mobile/affair/confirmAffairTask")
+    Observable<Bean<EmptyBean>> confirmAffairTask(@FieldMap Map<String, Object> map);
 
     @FormUrlEncoded
     @POST("/api/mobile/task/getTaskDetail")

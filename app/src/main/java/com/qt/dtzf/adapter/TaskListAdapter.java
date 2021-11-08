@@ -17,6 +17,7 @@ import com.base.baselib.utils.SpUtilsConstant;
 import com.qt.dtzf.R;
 import com.qt.dtzf.bean.TaskInfoBean;
 import com.qt.dtzf.ui.ChoiceTaskListActivity;
+import com.qt.dtzf.ui.PerformAffairsActivity;
 import com.qt.dtzf.ui.TaskListItemActivity;
 import com.qt.dtzf.ui.TaskMainActivity;
 import com.qt.dtzf.ui.TaskSignInActivity;
@@ -142,7 +143,11 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
                         TaskListItemActivity.gotoActivity(mContext, item);
                         break;
                     case 2://待签到
-                        TaskSignInActivity.gotoActivity(mContext, item);
+                        if (item.getQualityType() == 0){
+                            PerformAffairsActivity.gotoActivity(mContext, item);
+                        }else {
+                            TaskSignInActivity.gotoActivity(mContext, item);
+                        }
                         break;
                     case 3:
                     case 4:
