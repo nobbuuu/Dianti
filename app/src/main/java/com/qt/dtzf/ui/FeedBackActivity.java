@@ -26,10 +26,13 @@ import com.blankj.utilcode.util.BarUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.qt.dtzf.R;
+import com.qt.dtzf.adapter.CommentsAdapter;
 import com.qt.dtzf.adapter.PerformImgAdapter;
+import com.qt.dtzf.common.TActionCallback;
 import com.qt.dtzf.common.WaterFallItemDecoration;
 import com.qt.dtzf.utils.ToastUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -76,11 +79,17 @@ public class FeedBackActivity extends BaseActivity {
     ConstraintLayout titleBar;
 
     private String mTaskId;
+    private String mId;
     private String imgUrls = "";
+    private int requestCode1 = 100;
+    private int requestCode2 = 200;
+    private List<CommentsBean> commentsList = new ArrayList<>();
+    private CommentsAdapter commentsAdapter;
 
-    public static void gotoActivity(Activity activity, String id) {
+    public static void gotoActivity(Activity activity, String id, String taskId) {
         Intent intent = new Intent(activity, FeedBackActivity.class);
-        intent.putExtra("taskId", id);
+        intent.putExtra("id", id);
+        intent.putExtra("taskId", taskId);
         activity.startActivity(intent);
     }
 
@@ -91,6 +100,7 @@ public class FeedBackActivity extends BaseActivity {
         ButterKnife.bind(this);
         titleBar.setPadding(0, BarUtils.getStatusBarHeight(), 0, 0);
         mTaskId = getIntent().getStringExtra("taskId");
+        mId = getIntent().getStringExtra("id");
         if (mTaskId == null || mTaskId.isEmpty()) {
             ToastUtils.Toast_long("数据异常");
             finish();
@@ -101,7 +111,23 @@ public class FeedBackActivity extends BaseActivity {
         completeTv.setVisibility(View.GONE);
         cameraIcon.setVisibility(View.VISIBLE);
         titleTv.setText("问题反馈");
+        initCommentsAdapter();
         getData();
+    }
+
+    private void initCommentsAdapter() {
+        commentsAdapter = new CommentsAdapter(FeedBackActivity.this, commentsList, R.layout.rvitem_comments);
+        uploadHisRv.setAdapter(commentsAdapter);
+        commentsAdapter.setActionCallBack(new TActionCallback<CommentsBean>() {
+            @Override
+            public void onAction(int tag, CommentsBean data, String inputStr) {
+                if (tag == 1) {
+                    toImageListForActivity(requestCode2);
+                } else if (tag == 2) {
+                    commitTask(data.getId() + "", inputStr);
+                }
+            }
+        });
     }
 
     private void getData() {
@@ -112,7 +138,9 @@ public class FeedBackActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<BeanList<CommentsBean>>() {
                     @Override
                     public void onSuccess(BeanList<CommentsBean> data) {
-
+                        commentsList.clear();
+                        commentsList.addAll(data.data);
+                        commentsAdapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -129,7 +157,7 @@ public class FeedBackActivity extends BaseActivity {
             return;
         }
         Observable<Bean<HistotyBean>> detail = WorkModel.getInstance()
-                .submitAffairComment(mTaskId, inputStr, replyId, imgUrls);
+                .submitAffairComment(mId, inputStr, replyId, imgUrls);
         detail.compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -152,11 +180,11 @@ public class FeedBackActivity extends BaseActivity {
 
     }
 
-    private void toImageListForActivity() {
+    private void toImageListForActivity(int requestCode) {
         Intent intent = new Intent(this, UploadImageActivity.class);
         intent.putExtra("taskId", mTaskId);
         intent.putExtra("fromTag", 2);
-        startActivityForResult(intent, ImageRequestCode);
+        startActivityForResult(intent, requestCode);
     }
 
     @Override
@@ -175,10 +203,14 @@ public class FeedBackActivity extends BaseActivity {
                         stringBuffer.append(mList.get(i).getImgUrl() + ",");
                     }
                 }
-                imgUrls = stringBuffer.toString();
-                imgRv.setLayoutManager(new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL));
-                imgRv.addItemDecoration(new WaterFallItemDecoration(30, 30));
-                imgRv.setAdapter(new PerformImgAdapter(this, mList, R.layout.rvitem_onlyimg));
+                if (requestCode == requestCode1) {
+                    imgUrls = stringBuffer.toString();
+                    imgRv.setLayoutManager(new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL));
+                    imgRv.addItemDecoration(new WaterFallItemDecoration(30, 30));
+                    imgRv.setAdapter(new PerformImgAdapter(this, mList, R.layout.rvitem_onlyimg));
+                } else if (requestCode == requestCode2) {
+                    commentsAdapter.setDialogImg(mList);
+                }
             }
         }
     }
@@ -190,7 +222,7 @@ public class FeedBackActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.cameraIcon:
-                toImageListForActivity();
+                toImageListForActivity(requestCode1);
                 break;
             case R.id.commitTv:
                 String inputStr = inputEdt.getText().toString();

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -9,66 +8,30 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp">
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginEnd="10dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
 
-            <com.ruffian.library.widget.RImageView
-                android:id="@+id/avatarIv"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/avater"
-                app:is_circle="true"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/titleName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                app:layout_constraintBottom_toTopOf="@+id/phoneTv"
-                app:layout_constraintStart_toEndOf="@+id/avatarIv"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textSize="13sp"
-                android:textColor="@color/black"
-                tools:text="颠三倒四" />
-
-            <TextView
-                android:id="@+id/phoneTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/avatarIv"
-                app:layout_constraintStart_toEndOf="@+id/avatarIv"
-                app:layout_constraintTop_toBottomOf="@+id/titleName"
-                android:textSize="12sp"
-                android:textColor="@color/black"
-                tools:text="18277750576" />
-            <TextView
-                android:id="@+id/comentsTv"
-                android:layout_width="wrap_content"
-                android:text="搞好了吗圣诞节发的坡国际打算复读"
-                app:layout_constraintTop_toBottomOf="@+id/avatarIv"
-                android:layout_marginTop="22dp"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
-               android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/replyTv"
-                android:layout_width="wrap_content"
-                android:text="回复"
-                android:textColor="@color/color_main_blue"
-                app:layout_constraintTop_toBottomOf="@+id/comentsTv"
-                app:layout_constraintEnd_toEndOf="parent"
+            <include layout="@layout/include_comments"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/replyRv"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:overScrollMode="never"
+                android:background="@drawable/shape_stroke_gray"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_marginBottom="10dp"
                 android:layout_height="wrap_content"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.cardview.widget.CardView>
 
 </FrameLayout>

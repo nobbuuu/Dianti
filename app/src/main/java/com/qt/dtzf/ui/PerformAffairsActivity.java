@@ -2,6 +2,7 @@ package com.qt.dtzf.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -92,13 +93,14 @@ public class PerformAffairsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perform_task);
         ButterKnife.bind(this);
-        titleBar.setPadding(0, BarUtils.getStatusBarHeight(),0,0);
+        titleBar.setPadding(0, BarUtils.getStatusBarHeight(), 0, 0);
         mTaskInfo = (TaskInfo.ListBean) getIntent().getSerializableExtra("taskInfoBean");
-        if (mTaskInfo == null){
+        if (mTaskInfo == null) {
             ToastUtils.Toast_long("数据异常");
             finish();
         }
         uploadImgLay = findViewById(R.id.uploadImgLay);
+        uploadHisRv.setBackgroundColor(Color.WHITE);
         getData();
     }
 
@@ -120,10 +122,10 @@ public class PerformAffairsActivity extends BaseActivity {
                             }
                         }
                         int totalCount = bean.data.getTotalCount();
-                        if (totalCount != 0){
+                        if (totalCount != 0) {
                             countTv.setVisibility(View.VISIBLE);
-                            countTv.setText(totalCount+"");
-                        }else {
+                            countTv.setText(totalCount + "");
+                        } else {
                             countTv.setVisibility(View.GONE);
                         }
                     }
@@ -198,10 +200,18 @@ public class PerformAffairsActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 117 && data != null) {
-            imgUrls = data.getStringExtra("imgList");
-            List<ImgBean> mList = new Gson().fromJson(imgUrls, new TypeToken<List<ImgBean>>() {
-            }.getType());
-            if (mList != null) {
+            String imgList = data.getStringExtra("imgList");
+            List<ImgBean> mList = new Gson().fromJson(imgList, new TypeToken<List<ImgBean>>() {}.getType());
+            if (mList != null && mList.size() > 0) {
+                StringBuffer stringBuffer = new StringBuffer();
+                for (int i = 0; i < mList.size(); i++) {
+                    if (i == mList.size() - 1) {
+                        stringBuffer.append(mList.get(i).getImgUrl());
+                    } else {
+                        stringBuffer.append(mList.get(i).getImgUrl() + ",");
+                    }
+                }
+                imgUrls = stringBuffer.toString();
                 imgRv.setLayoutManager(new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL));
                 imgRv.addItemDecoration(new WaterFallItemDecoration(30, 30));
                 imgRv.setAdapter(new PerformImgAdapter(this, mList, R.layout.rvitem_onlyimg));
@@ -209,7 +219,7 @@ public class PerformAffairsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.backIv, R.id.completeTv, R.id.uploadImgLay, R.id.commitTv,R.id.qustionIv})
+    @OnClick({R.id.backIv, R.id.completeTv, R.id.uploadImgLay, R.id.commitTv, R.id.qustionIv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.backIv:
@@ -230,7 +240,7 @@ public class PerformAffairsActivity extends BaseActivity {
                 commitTask();
                 break;
             case R.id.qustionIv:
-                FeedBackActivity.gotoActivity(this,mTaskInfo.getTaskId());
+                FeedBackActivity.gotoActivity(this, mTaskInfo.getId(), mTaskInfo.getTaskId());
                 break;
         }
     }
