@@ -169,6 +169,7 @@ public class FeedBackActivity extends BaseActivity {
                         } else {
                             ToastUtils.Toast_long("回复成功");
                         }
+                        getData();
                     }
 
                     @Override
@@ -203,8 +204,8 @@ public class FeedBackActivity extends BaseActivity {
                         stringBuffer.append(mList.get(i).getImgUrl() + ",");
                     }
                 }
+                imgUrls = stringBuffer.toString();
                 if (requestCode == requestCode1) {
-                    imgUrls = stringBuffer.toString();
                     imgRv.setLayoutManager(new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL));
                     imgRv.addItemDecoration(new WaterFallItemDecoration(30, 30));
                     imgRv.setAdapter(new PerformImgAdapter(this, mList, R.layout.rvitem_onlyimg));

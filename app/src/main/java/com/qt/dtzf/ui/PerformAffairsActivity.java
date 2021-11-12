@@ -100,7 +100,6 @@ public class PerformAffairsActivity extends BaseActivity {
             finish();
         }
         uploadImgLay = findViewById(R.id.uploadImgLay);
-        uploadHisRv.setBackgroundColor(Color.WHITE);
         getData();
     }
 
@@ -115,9 +114,8 @@ public class PerformAffairsActivity extends BaseActivity {
                     public void onSuccess(Bean<HistotyBean> bean) {
                         List<HistotyBean.ListBean> list = bean.data.getList();
                         if (list != null && list.size() > 0) {
-                            List<HistotyBean.ListBean.PointListBean> pointList = list.get(0).getPointList();
-                            if (pointList != null && pointList.size() > 0) {
-                                PerformHistoryAdapter adapter = new PerformHistoryAdapter(PerformAffairsActivity.this, pointList, R.layout.rvitem_affairs_history);
+                            if (list != null && list.size() > 0) {
+                                PerformHistoryAdapter adapter = new PerformHistoryAdapter(PerformAffairsActivity.this, list, R.layout.rvitem_affairs_history);
                                 uploadHisRv.setAdapter(adapter);
                             }
                         }

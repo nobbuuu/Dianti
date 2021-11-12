@@ -28,7 +28,7 @@ public class CommentsBean {
     private String userName;
     private int taskId;
     private String content;
-    private List<?> children;
+    private List<CommentsBean> children;
 
     public int getTaskDistributeId() {
         return taskDistributeId;
@@ -110,11 +110,11 @@ public class CommentsBean {
         this.content = content;
     }
 
-    public List<?> getChildren() {
+    public List<CommentsBean> getChildren() {
         return children;
     }
 
-    public void setChildren(List<?> children) {
+    public void setChildren(List<CommentsBean> children) {
         this.children = children;
     }
 }

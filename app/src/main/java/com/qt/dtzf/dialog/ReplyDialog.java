@@ -65,6 +65,7 @@ public class ReplyDialog extends Dialog {
                 }
                 if (callback != null){
                     callback.onAction(2,inputEdt.getText().toString());
+                    dismiss();
                 }
             }
         });

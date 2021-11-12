@@ -7,8 +7,10 @@
 
     <include layout="@layout/include_comments"/>
     <View
+        android:id="@+id/divider"
         android:layout_width="match_parent"
         android:background="@color/defaut_divider"
         android:layout_margin="10dp"
+        android:visibility="gone"
         android:layout_height="1dp"/>
 </LinearLayout>
