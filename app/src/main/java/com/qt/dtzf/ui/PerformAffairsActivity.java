@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -124,10 +125,9 @@ public class PerformAffairsActivity extends BaseActivity {
                     public void onSuccess(Bean<HistotyBean> bean) {
                         List<HistotyBean.ListBean> list = bean.data.getList();
                         if (list != null && list.size() > 0) {
-                            if (list != null && list.size() > 0) {
-                                PerformHistoryAdapter adapter = new PerformHistoryAdapter(PerformAffairsActivity.this, list, R.layout.rvitem_affairs_history);
-                                uploadHisRv.setAdapter(adapter);
-                            }
+                            Log.d("aaa","list.size = " + list.size());
+                            PerformHistoryAdapter adapter = new PerformHistoryAdapter(PerformAffairsActivity.this, list, R.layout.rvitem_affairs_history);
+                            uploadHisRv.setAdapter(adapter);
                         }
                         int totalCount = bean.data.getTotalCount();
                         if (totalCount != 0) {
@@ -164,6 +164,7 @@ public class PerformAffairsActivity extends BaseActivity {
                         inputEdt.setText("");
                         mImgList.clear();
                         performImgAdapter.notifyDataSetChanged();
+                        getData();
                     }
 
                     @Override
