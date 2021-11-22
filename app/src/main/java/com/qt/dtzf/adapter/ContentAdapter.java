@@ -1,6 +1,8 @@
 package com.qt.dtzf.adapter;
 
 import android.content.Context;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -15,6 +17,9 @@ import com.qt.dtzf.common.WaterFallItemDecoration;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 政务历史提交
+ */
 public class ContentAdapter extends RVBaseAdapter<HistotyBean.ListBean.PointListBean> {
 
     private Context mContext;
@@ -32,10 +37,18 @@ public class ContentAdapter extends RVBaseAdapter<HistotyBean.ListBean.PointList
     @Override
     public void onBind(RVBaseHolder holder, HistotyBean.ListBean.PointListBean item, int position) {
 
-        holder.setText(R.id.summaryTv, item.getCheckData());
+        TextView uploadImgTitle = holder.getView(R.id.uploadImgTitle);
+        TextView taskDesTitle = holder.getView(R.id.taskDesTitle);
+        if (item.getCheckData() == null || item.getCheckData().isEmpty()){
+            taskDesTitle.setVisibility(View.GONE);
+        }else {
+            taskDesTitle.setVisibility(View.VISIBLE);
+            holder.setText(R.id.summaryTv, item.getCheckData());
+        }
         String xcqzImg = item.getXcqzImg();
         List<ImgBean> mList = new ArrayList<>();
         if (xcqzImg != null && !xcqzImg.isEmpty()) {
+            uploadImgTitle.setVisibility(View.VISIBLE);
             try {
                 mList = new Gson().fromJson(xcqzImg, new TypeToken<List<ImgBean>>() {}.getType());
             }catch (Exception e){
@@ -56,6 +69,8 @@ public class ContentAdapter extends RVBaseAdapter<HistotyBean.ListBean.PointList
                 imgRv.addItemDecoration(new WaterFallItemDecoration(30, 30));
                 imgRv.setAdapter(new PerformImgAdapter(mContext, mList, R.layout.rvitem_onlyimg));
             }
+        }else {
+            uploadImgTitle.setVisibility(View.GONE);
         }
     }
 }
