@@ -8,8 +8,8 @@
 
     <com.ruffian.library.widget.RImageView
         android:id="@+id/avatarIv"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/avater"
         app:is_circle="true"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,11 +17,14 @@
 
     <TextView
         android:id="@+id/userName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:textColor="@color/black"
-        android:textSize="13sp"
+        android:textColor="@color/color_main_blue"
+        android:lines="1"
+        android:textSize="12sp"
+        android:ellipsize="end"
         app:layout_constraintBottom_toTopOf="@+id/phoneTv"
         app:layout_constraintStart_toEndOf="@+id/avatarIv"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,23 +34,25 @@
         android:id="@+id/phoneTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="5dp"
         android:textColor="@color/black"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/avatarIv"
-        app:layout_constraintStart_toEndOf="@+id/avatarIv"
-        app:layout_constraintTop_toBottomOf="@+id/userName"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@+id/userName"
+        app:layout_constraintTop_toTopOf="@+id/userName"
         tools:text="18277750576" />
 
     <TextView
         android:id="@+id/comentsTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="5dp"
         android:text="搞好了吗圣诞节发的坡国际打算复读"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avatarIv" />
+        android:textColor="@color/text_norm_black"
+        android:layout_marginStart="12dp"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@+id/avatarIv"
+        app:layout_constraintTop_toBottomOf="@+id/userName"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/replyImgRv"
         app:layout_constraintTop_toBottomOf="@+id/comentsTv"

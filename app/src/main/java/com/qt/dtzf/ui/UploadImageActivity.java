@@ -48,6 +48,7 @@ import com.base.baselib.view.TitleView;
 import com.google.gson.Gson;
 import com.qt.dtzf.R;
 import com.qt.dtzf.adapter.SafeCheckItemAdapter;
+import com.qt.dtzf.adapter.UnImagBasisAdapter;
 import com.qt.dtzf.bean.ImgResultBean;
 import com.qt.dtzf.utils.ToastUtils;
 
@@ -65,6 +66,7 @@ import java.util.List;
 public class UploadImageActivity extends BaseActivity {
 
     private RecyclerView mDescribeRv;
+    private RecyclerView unImgRv;
     private SafeCheckItemAdapter mAdapter;
     private AlbumUtils mAlbumUtils;
     private int mMaxSize = 6;
@@ -78,11 +80,13 @@ public class UploadImageActivity extends BaseActivity {
 
     private TitleView mTitleView;
     private int fromTag;
+
     public static void gotoActivity(Activity activity, int fromTag) {
         Intent intent = new Intent(activity, UploadImageActivity.class);
         intent.putExtra("fromTag", fromTag);
         activity.startActivity(intent);
     }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +98,7 @@ public class UploadImageActivity extends BaseActivity {
     private void initView() {
 
         mDescribeRv = findViewById(R.id.upload_image_rv);
+        unImgRv = findViewById(R.id.unImgRv);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mDescribeRv.setLayoutManager(layoutManager);
         mAdapter = new SafeCheckItemAdapter(this, mMaxSize);
@@ -105,11 +110,21 @@ public class UploadImageActivity extends BaseActivity {
 
         uploadImageBtn.setOnClickListener(mClickListener);
         mImges = getIntent().getStringExtra("xcqzImg");
-        fromTag = getIntent().getIntExtra("fromTag",0);
+        fromTag = getIntent().getIntExtra("fromTag", 0);
         isCheckBasis = getIntent().getBooleanExtra("checkBasis", false);
         if (isCheckBasis) {
             uploadImageBtn.setVisibility(View.GONE);
             mTitleView.setTitleText("检查依据");
+            String unImges = getIntent().getStringExtra("unImgBasis");
+            if (unImges!=null && !unImges.isEmpty()){
+                String[] unImgBasis = unImges.split(",");
+                List<String> docList = new ArrayList<>();
+                for (int i = 0; i < unImgBasis.length; i++) {
+                    docList.add(unImgBasis[i]);
+                }
+                UnImagBasisAdapter basisAdapter = new UnImagBasisAdapter(this, docList, R.layout.rvitem_onlytext);
+                unImgRv.setAdapter(basisAdapter);
+            }
         }
         if (!TextUtils.isEmpty(mImges)) {
             if (mImges.length() > 0) {
@@ -215,12 +230,12 @@ public class UploadImageActivity extends BaseActivity {
 
     private void upAllImgFiles() {
         mList = mAdapter.getImageList();
-        if (fromTag == 2){
+        if (fromTag == 2) {
             Intent intent = getIntent();
             intent.putExtra("imgList", new Gson().toJson(mList));
-            setResult(117,intent);
+            setResult(117, intent);
             finish();
-        }else {
+        } else {
             StringBuffer buffer = new StringBuffer();
             for (int i = 0; i < mList.size(); i++) {
                 String imgUrl = mList.get(i).getImgUrl();

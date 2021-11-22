@@ -2,7 +2,6 @@ package com.qt.dtzf.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -35,6 +34,7 @@ import com.qt.dtzf.common.WaterFallItemDecoration;
 import com.qt.dtzf.dialog.ConfirmTaskDialog;
 import com.qt.dtzf.utils.ToastUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -81,6 +81,8 @@ public class PerformAffairsActivity extends BaseActivity {
     ConstraintLayout titleBar;
     private TaskInfo.ListBean mTaskInfo;
     private String imgUrls = "";
+    private PerformImgAdapter performImgAdapter;
+    private List<ImgBean> mImgList = new ArrayList<>();
 
     public static void gotoActivity(Activity activity, TaskInfo.ListBean taskInfoBean) {
         Intent intent = new Intent(activity, PerformAffairsActivity.class);
@@ -101,6 +103,14 @@ public class PerformAffairsActivity extends BaseActivity {
         }
         uploadImgLay = findViewById(R.id.uploadImgLay);
         getData();
+        onevent();
+    }
+
+    private void onevent() {
+        performImgAdapter = new PerformImgAdapter(this, mImgList, R.layout.rvitem_onlyimg);
+        imgRv.setLayoutManager(new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL));
+        imgRv.addItemDecoration(new WaterFallItemDecoration(30, 30));
+        imgRv.setAdapter(performImgAdapter);
     }
 
     private void getData() {
@@ -138,8 +148,8 @@ public class PerformAffairsActivity extends BaseActivity {
 
     private void commitTask() {
         String inputStr = inputEdt.getText().toString();
-        if (imgUrls.isEmpty()) {
-            ToastUtils.Toast_long("请先上传现场照片");
+        if (inputStr.isEmpty()) {
+            ToastUtils.Toast_long("请先输入检查结果");
             return;
         }
         Observable<Bean<EmptyBean>> detail = WorkModel.getInstance()
@@ -151,6 +161,9 @@ public class PerformAffairsActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Bean<EmptyBean> taskDetailBean) {
                         ToastUtils.Toast_long("提交成功");
+                        inputEdt.setText("");
+                        mImgList.clear();
+                        performImgAdapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -210,9 +223,9 @@ public class PerformAffairsActivity extends BaseActivity {
                     }
                 }
                 imgUrls = stringBuffer.toString();
-                imgRv.setLayoutManager(new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL));
-                imgRv.addItemDecoration(new WaterFallItemDecoration(30, 30));
-                imgRv.setAdapter(new PerformImgAdapter(this, mList, R.layout.rvitem_onlyimg));
+                mImgList.clear();
+                mImgList.addAll(mList);
+                performImgAdapter.notifyDataSetChanged();
             }
         }
     }

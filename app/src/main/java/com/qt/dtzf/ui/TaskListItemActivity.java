@@ -15,6 +15,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.base.baselib.BaseAPP;
 import com.base.baselib.base.BaseActivity;
 import com.base.baselib.base.ErrorFragment;
+import com.base.baselib.bean.BasisBean;
 import com.base.baselib.bean.TaskDetail;
 import com.base.baselib.bean.TaskInfo;
 import com.base.baselib.bean.TaskInfoItem;
@@ -23,6 +24,8 @@ import com.base.baselib.model.WorkModel;
 import com.base.baselib.net.DefaultObserver;
 import com.base.baselib.utils.LogUtils;
 import com.base.baselib.utils.MapHelper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.qt.dtzf.R;
 import com.base.baselib.bean.AffairsTaskDetailBean;
 import com.qt.dtzf.utils.DateFormatUtil;
@@ -31,6 +34,7 @@ import com.qt.dtzf.utils.ToastUtils;
 import androidx.annotation.Nullable;
 
 import java.util.Date;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -87,9 +91,9 @@ public class TaskListItemActivity extends BaseActivity {
         mDevTv = findViewById(R.id.sampling_task_dev_tv);
         mCheckTv = findViewById(R.id.sampling_task_check_tv);
         mCheckBasicTv = findViewById(R.id.sampling_task_basis_tv);
-        if (TextUtils.isEmpty(mTaskInfo.getCheckBasis())){
+        if (TextUtils.isEmpty(mTaskInfo.getCheckBasis())) {
             mCheckBasicTv.setVisibility(View.GONE);
-        }else {
+        } else {
             mCheckBasicTv.setVisibility(View.VISIBLE);
         }
         mCheckBasicTv.setOnClickListener(mClickListener);
@@ -97,7 +101,7 @@ public class TaskListItemActivity extends BaseActivity {
     }
 
     private void getData() {
-        if (mTaskInfo.getQualityType() != 0){
+        if (mTaskInfo.getQualityType() != 0) {
             Observable<Bean<TaskDetail>> detail = WorkModel.getInstance().getTaskDetail(mTaskInfo.getId(), mTaskInfo.getTaskId(), mTaskInfo.getQualityType());
             showWaitFragment();
             detail.compose(this.bindToLifecycle())
@@ -122,7 +126,7 @@ public class TaskListItemActivity extends BaseActivity {
                             showErrorView(mRefreshListener);
                         }
                     });
-        }else {
+        } else {
             refreshAffairsData();
         }
         getLocation();
@@ -145,10 +149,10 @@ public class TaskListItemActivity extends BaseActivity {
 
     private void confirmTask() {
         Observable<Bean<TaskInfoItem>> detail = null;
-        if (mTaskInfo.getQualityType() != 0){
+        if (mTaskInfo.getQualityType() != 0) {
             detail = WorkModel.getInstance().confirmTask(mTaskInfo.getId(), mTaskInfo.getTaskId());
-        }else {
-            detail = WorkModel.getInstance().confirmAffairsTask(mTaskInfo.getId(),String.valueOf(mLatitude),String.valueOf(mLongitude));
+        } else {
+            detail = WorkModel.getInstance().confirmAffairsTask(mTaskInfo.getId(), String.valueOf(mLatitude), String.valueOf(mLongitude));
         }
         detail.compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
@@ -156,9 +160,9 @@ public class TaskListItemActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<Bean<TaskInfoItem>>() {
                     @Override
                     public void onSuccess(Bean<TaskInfoItem> taskDetailBean) {
-                        if (mTaskInfo.getQualityType() != 0){
+                        if (mTaskInfo.getQualityType() != 0) {
                             TaskSignInActivity.gotoActivity(TaskListItemActivity.this, mTaskInfo);
-                        }else {
+                        } else {
                             PerformAffairsActivity.gotoActivity(TaskListItemActivity.this, mTaskInfo);
                             finish();
                         }
@@ -216,8 +220,21 @@ public class TaskListItemActivity extends BaseActivity {
                 case R.id.sampling_task_basis_tv:
                     //检查依据
                     if (mTaskInfo != null && !TextUtils.isEmpty(mTaskInfo.getCheckBasis())) {
-                        toImageListForActivity();
-                    }else {
+                        List<BasisBean> basisBeans = new Gson().fromJson(mTaskInfo.getCheckBasis(), new TypeToken<List<BasisBean>>() {
+                        }.getType());
+                        if (basisBeans != null) {
+                            StringBuffer imgBuffer = new StringBuffer();
+                            StringBuffer unimgBuffer = new StringBuffer();
+                            for (BasisBean bean : basisBeans) {
+                                if (bean.getFileType().contains("image")) {
+                                    imgBuffer.append(bean.getFilePath() + ",");
+                                }else {
+                                    unimgBuffer.append(bean.getFilePath() + ",");
+                                }
+                            }
+                            toImageListForActivity(imgBuffer.toString(),unimgBuffer.toString());
+                        }
+                    } else {
                         ToastUtils.Toast_long("数据异常");
                     }
                     break;
@@ -229,11 +246,12 @@ public class TaskListItemActivity extends BaseActivity {
         }
     };
 
-    private void toImageListForActivity() {
+    private void toImageListForActivity(String xcqzImg,String unImgBasis) {
         Intent intent = new Intent(TaskListItemActivity.this, UploadImageActivity.class);
         if (mTaskInfo != null) {
             intent.putExtra("taskId", mTaskInfo.getId());
-            intent.putExtra("xcqzImg", mTaskInfo.getCheckBasis());
+            intent.putExtra("xcqzImg", xcqzImg);
+            intent.putExtra("unImgBasis", unImgBasis);
             intent.putExtra("checkBasis", true);
         }
         startActivity(intent);

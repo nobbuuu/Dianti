@@ -1,8 +1,15 @@
 package com.qt.dtzf.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.ColorSpace;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -25,10 +32,12 @@ public class CommentsAdapter extends RVBaseAdapter<CommentsBean> {
     private TActionCallback<CommentsBean> mCallBack;
     private ReplyDialog mDialog;
     private CommentsBean tempItem;
+    private CommentsBean parentBean;
 
-    public CommentsAdapter(Context context, List<CommentsBean> data, int layoutIds) {
+    public CommentsAdapter(Context context, List<CommentsBean> data, int layoutIds, CommentsBean parentBean) {
         super(context, data, layoutIds);
         mContext = context;
+        this.parentBean = parentBean;
         mDialog = new ReplyDialog(mContext, new DialogActionCallback() {
             @Override
             public void onAction(int tag, String inputStr) {
@@ -46,7 +55,6 @@ public class CommentsAdapter extends RVBaseAdapter<CommentsBean> {
 
     @Override
     public void onBind(RVBaseHolder holder, CommentsBean item, int position) {
-        holder.setText(R.id.userName, item.getUserName());
         holder.setText(R.id.phoneTv, item.getPhone());
         ImageView avatarIv = holder.getView(R.id.avatarIv);
         String contentPic = item.getContentPic();
@@ -63,9 +71,23 @@ public class CommentsAdapter extends RVBaseAdapter<CommentsBean> {
                 replyImgRv.setAdapter(new PerformImgAdapter(context, data, R.layout.rvitem_onlyimg));
             }
         }
+
+        String title = item.getUserName() + " " + item.getPhone();
+        if (parentBean != null) {
+            String parentInfo = parentBean.getUserName() + "  " + item.getPhone();
+            String spanStr = title + " 回复 " + parentInfo;
+            SpannableString builder = new SpannableString(spanStr);
+            ForegroundColorSpan colorSpan = new ForegroundColorSpan(context.getResources().getColor(R.color.text_norm_black));
+            builder.setSpan(colorSpan, spanStr.indexOf("回"), spanStr.indexOf("复") + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            TextView titleTv = holder.getView(R.id.userName);
+            titleTv.setText(builder);
+        } else {
+            holder.setText(R.id.userName, title);
+        }
         if (item.getChildren() != null && item.getChildren().size() > 0) {
             RecyclerView replyRv = holder.getView(R.id.replyRv);
-            CommentsAdapter adapter = new CommentsAdapter(context, item.getChildren(), R.layout.rvitem_comments);
+            CommentsAdapter adapter = new CommentsAdapter(context, item.getChildren(), R.layout.rvitem_comments, item);
+            adapter.setActionCallBack(mCallBack);
             replyRv.setAdapter(adapter);
         }
         GlideUtils.loadImage(mContext, item.getAvatar(), avatarIv);

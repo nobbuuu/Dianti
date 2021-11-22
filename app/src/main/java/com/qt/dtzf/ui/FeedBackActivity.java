@@ -83,7 +83,9 @@ public class FeedBackActivity extends BaseActivity {
     private String imgUrls = "";
     private int requestCode1 = 100;
     private int requestCode2 = 200;
+    private List<ImgBean> mImgList = new ArrayList<>();
     private List<CommentsBean> commentsList = new ArrayList<>();
+    private PerformImgAdapter imgAdapter;
     private CommentsAdapter commentsAdapter;
 
     public static void gotoActivity(Activity activity, String id, String taskId) {
@@ -113,11 +115,18 @@ public class FeedBackActivity extends BaseActivity {
         titleTv.setText("问题反馈");
         initCommentsAdapter();
         getData();
+        initRv();
+    }
+
+    private void initRv() {
+        imgAdapter = new PerformImgAdapter(this, mImgList, R.layout.rvitem_onlyimg);
+        imgRv.setLayoutManager(new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL));
+        imgRv.addItemDecoration(new WaterFallItemDecoration(30, 30));
+        imgRv.setAdapter(imgAdapter);
     }
 
     private void initCommentsAdapter() {
-        commentsAdapter = new CommentsAdapter(FeedBackActivity.this, commentsList, R.layout.rvitem_comments);
-        uploadHisRv.setAdapter(commentsAdapter);
+        commentsAdapter = new CommentsAdapter(FeedBackActivity.this, commentsList, R.layout.rvitem_comments,null);
         commentsAdapter.setActionCallBack(new TActionCallback<CommentsBean>() {
             @Override
             public void onAction(int tag, CommentsBean data, String inputStr) {
@@ -128,6 +137,7 @@ public class FeedBackActivity extends BaseActivity {
                 }
             }
         });
+        uploadHisRv.setAdapter(commentsAdapter);
     }
 
     private void getData() {
@@ -169,6 +179,9 @@ public class FeedBackActivity extends BaseActivity {
                         } else {
                             ToastUtils.Toast_long("回复成功");
                         }
+                        imgUrls = "";
+                        mImgList.clear();
+                        imgAdapter.notifyDataSetChanged();
                         getData();
                     }
 
@@ -206,9 +219,9 @@ public class FeedBackActivity extends BaseActivity {
                 }
                 imgUrls = stringBuffer.toString();
                 if (requestCode == requestCode1) {
-                    imgRv.setLayoutManager(new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL));
-                    imgRv.addItemDecoration(new WaterFallItemDecoration(30, 30));
-                    imgRv.setAdapter(new PerformImgAdapter(this, mList, R.layout.rvitem_onlyimg));
+                    mImgList.clear();
+                    mImgList.addAll(mList);
+                    imgAdapter.notifyDataSetChanged();
                 } else if (requestCode == requestCode2) {
                     commentsAdapter.setDialogImg(mList);
                 }

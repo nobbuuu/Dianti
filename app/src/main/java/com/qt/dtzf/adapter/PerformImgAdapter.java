@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import com.base.baselib.bean.ElevatorInfo;
 import com.base.baselib.bean.ImgBean;
 import com.base.baselib.glide.GlideUtils;
+import com.base.baselib.view.PhotoViewActivity;
 import com.qt.dtzf.R;
 
 import java.util.List;
@@ -33,6 +34,13 @@ public class PerformImgAdapter extends RVBaseAdapter<ImgBean> {
     public void onBind(RVBaseHolder holder, ImgBean item, int position) {
         ImageView imgView = holder.getView(R.id.imgIv);
         GlideUtils.loadImage(mContext,item.getImgUrl(),imgView);
+        imgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //点击跳转图片预览
+                PhotoViewActivity.gotoActivity(mContext, item.getImgUrl());
+            }
+        });
     }
 
     @Override
