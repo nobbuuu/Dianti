@@ -8,4 +8,6 @@
     <!--【黑色】颜色的主色调-->
     <color name="text_norm_black">#2D3132</color>
     <color name="color_main_blue">#016EDD</color>
+    <color name="regular_red">#FFE64C3D</color>
+    <color name="defaut_divider">#FAFAFA</color>
 </resources>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <com.ruffian.library.widget.RImageView
+        android:id="@+id/avatarIv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/avater"
+        app:is_circle="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textColor="@color/color_main_blue"
+        android:lines="1"
+        android:textSize="12sp"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toTopOf="@+id/phoneTv"
+        app:layout_constraintStart_toEndOf="@+id/avatarIv"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="颠三倒四" />
+
+    <TextView
+        android:id="@+id/phoneTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@+id/userName"
+        app:layout_constraintTop_toTopOf="@+id/userName"
+        tools:text="18277750576" />
+
+    <TextView
+        android:id="@+id/comentsTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="搞好了吗圣诞节发的坡国际打算复读"
+        android:textColor="@color/text_norm_black"
+        android:layout_marginStart="12dp"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@+id/avatarIv"
+        app:layout_constraintTop_toBottomOf="@+id/userName"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/replyImgRv"
+        app:layout_constraintTop_toBottomOf="@+id/comentsTv"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/replyTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="回复"
+        android:textColor="@color/color_main_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/replyImgRv" />
+</androidx.constraintlayout.widget.ConstraintLayout>

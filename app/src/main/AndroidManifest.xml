@@ -130,6 +130,8 @@
         <activity android:name=".ui.PerformTaskListActivity"/>
         <activity android:name=".ui.WebDetailsCaseListActivity"/>
         <activity android:name=".ui.ChoiceTaskListActivity"/>
+        <activity android:name=".ui.PerformAffairsActivity"/>
+        <activity android:name=".ui.FeedBackActivity"/>
 
         <!--高德地图-->
         <!--start-->

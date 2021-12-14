@@ -1,6 +1,7 @@
 package com.qt.dtzf.ui;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -33,6 +34,7 @@ import com.base.baselib.bean.EmptyBean;
 import com.base.baselib.bean.H5ResultBean;
 import com.base.baselib.bean.ImageUrl;
 import com.base.baselib.bean.ImgBean;
+import com.base.baselib.bean.TaskInfo;
 import com.base.baselib.bean.base.Bean;
 import com.base.baselib.bean.base.BeanList;
 import com.base.baselib.model.WorkModel;
@@ -46,6 +48,7 @@ import com.base.baselib.view.TitleView;
 import com.google.gson.Gson;
 import com.qt.dtzf.R;
 import com.qt.dtzf.adapter.SafeCheckItemAdapter;
+import com.qt.dtzf.adapter.UnImagBasisAdapter;
 import com.qt.dtzf.bean.ImgResultBean;
 import com.qt.dtzf.utils.ToastUtils;
 
@@ -53,6 +56,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +66,7 @@ import java.util.List;
 public class UploadImageActivity extends BaseActivity {
 
     private RecyclerView mDescribeRv;
+    private RecyclerView unImgRv;
     private SafeCheckItemAdapter mAdapter;
     private AlbumUtils mAlbumUtils;
     private int mMaxSize = 6;
@@ -74,6 +79,14 @@ public class UploadImageActivity extends BaseActivity {
     private AppCompatButton uploadImageBtn;
 
     private TitleView mTitleView;
+    private int fromTag;
+
+    public static void gotoActivity(Activity activity, int fromTag) {
+        Intent intent = new Intent(activity, UploadImageActivity.class);
+        intent.putExtra("fromTag", fromTag);
+        activity.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +98,7 @@ public class UploadImageActivity extends BaseActivity {
     private void initView() {
 
         mDescribeRv = findViewById(R.id.upload_image_rv);
+        unImgRv = findViewById(R.id.unImgRv);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mDescribeRv.setLayoutManager(layoutManager);
         mAdapter = new SafeCheckItemAdapter(this, mMaxSize);
@@ -96,10 +110,21 @@ public class UploadImageActivity extends BaseActivity {
 
         uploadImageBtn.setOnClickListener(mClickListener);
         mImges = getIntent().getStringExtra("xcqzImg");
+        fromTag = getIntent().getIntExtra("fromTag", 0);
         isCheckBasis = getIntent().getBooleanExtra("checkBasis", false);
         if (isCheckBasis) {
             uploadImageBtn.setVisibility(View.GONE);
             mTitleView.setTitleText("检查依据");
+            String unImges = getIntent().getStringExtra("unImgBasis");
+            if (unImges!=null && !unImges.isEmpty()){
+                String[] unImgBasis = unImges.split(",");
+                List<String> docList = new ArrayList<>();
+                for (int i = 0; i < unImgBasis.length; i++) {
+                    docList.add(unImgBasis[i]);
+                }
+                UnImagBasisAdapter basisAdapter = new UnImagBasisAdapter(this, docList, R.layout.rvitem_onlytext);
+                unImgRv.setAdapter(basisAdapter);
+            }
         }
         if (!TextUtils.isEmpty(mImges)) {
             if (mImges.length() > 0) {
@@ -205,42 +230,50 @@ public class UploadImageActivity extends BaseActivity {
 
     private void upAllImgFiles() {
         mList = mAdapter.getImageList();
-        StringBuffer buffer = new StringBuffer();
-        for (int i = 0; i < mList.size(); i++) {
-            String imgUrl = mList.get(i).getImgUrl();
-            if (!TextUtils.isEmpty(imgUrl)) {
-                buffer.append(imgUrl + ",");
+        if (fromTag == 2) {
+            Intent intent = getIntent();
+            intent.putExtra("imgList", new Gson().toJson(mList));
+            setResult(117, intent);
+            finish();
+        } else {
+            StringBuffer buffer = new StringBuffer();
+            for (int i = 0; i < mList.size(); i++) {
+                String imgUrl = mList.get(i).getImgUrl();
+                if (!TextUtils.isEmpty(imgUrl)) {
+                    buffer.append(imgUrl + ",");
+                }
             }
-        }
-        String imgUrls = buffer.toString();
-        if (!TextUtils.isEmpty(imgUrls)) {
-            imgUrls = imgUrls.substring(0, imgUrls.lastIndexOf(","));
-        }
-        String taskId = getIntent().getStringExtra("taskId");
-        showWaitDialog();
-        Observable<Bean<EmptyBean>> observable = WorkModel.getInstance().saveXCQZImg(taskId, imgUrls);
-        observable.compose(this.bindToLifecycle())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<Bean<EmptyBean>>() {
-                    @Override
-                    public void onSuccess(Bean<EmptyBean> bean) {
-                        ToastUtils.Toast_long("提交成功");
-                        finish();
-                    }
+            String imgUrls = buffer.toString();
+            if (!TextUtils.isEmpty(imgUrls)) {
+                imgUrls = imgUrls.substring(0, imgUrls.lastIndexOf(","));
+            }
+            String taskId = getIntent().getStringExtra("taskId");
+            showWaitDialog();
+            Observable<Bean<EmptyBean>> observable = WorkModel.getInstance().saveXCQZImg(taskId, imgUrls);
+            String finalImgUrls = imgUrls;
+            observable.compose(this.bindToLifecycle())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new DefaultObserver<Bean<EmptyBean>>() {
+                        @Override
+                        public void onSuccess(Bean<EmptyBean> bean) {
+                            ToastUtils.Toast_long("提交成功");
+                            finish();
+                        }
 
-                    @Override
-                    public void onFail(String code, String msg) {
-                        super.onFail(code, msg);
-                        hideWaitDialog();
-                    }
+                        @Override
+                        public void onFail(String code, String msg) {
+                            super.onFail(code, msg);
+                            hideWaitDialog();
+                        }
 
-                    @Override
-                    public void onStop() {
-                        super.onStop();
-                        hideWaitDialog();
-                    }
-                });
+                        @Override
+                        public void onStop() {
+                            super.onStop();
+                            hideWaitDialog();
+                        }
+                    });
+        }
     }
 
     private void upImages() {

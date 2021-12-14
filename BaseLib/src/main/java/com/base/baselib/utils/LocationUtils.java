@@ -16,7 +16,11 @@ public class LocationUtils {
 
     private void initLocationClient() {
         //初始化定位
-        mLocationClient = new AMapLocationClient(BaseAPP.mContext);
+        try {
+            mLocationClient = new AMapLocationClient(BaseAPP.mContext);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         AMapLocationClientOption option = new AMapLocationClientOption();
         /**
          * 设置定位场景，目前支持三种场景（签到、出行、运动，默认无场景）
@@ -32,7 +36,7 @@ public class LocationUtils {
     }
 
     public void addLocationListener(AMapLocationListener listener) {
-        if (listener == null) return;
+        if (listener == null  || mLocationClient == null) return;
         //设置定位回调监听
         mLocationClient.setLocationListener(listener);
     }
