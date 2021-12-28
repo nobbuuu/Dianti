@@ -141,6 +141,7 @@ public class HttpUtils {
             RequestBody imageBody = RequestBody.create(MediaType.parse("multipart/form-data"), mFile);
             builder.addFormDataPart("file", mFile.getName(), imageBody);//element 后台接收图片流的参数名
             builder.addFormDataPart("token", SpUtils.getString(SpUtilsConstant.apiKey));
+            builder.addFormDataPart("type", "image");
             RequestBody part = builder.build();
             return part;
         } else {
