@@ -135,8 +135,11 @@ public class AlbumActivity extends BaseActivity {
 
         @Override
         public int compare(AppImage lhs, AppImage rhs) {
-            if (lhs.imageFile.lastModified() < rhs.imageFile.lastModified()) {
-                return 1;//最后修改的照片在前
+            //最后修改的照片在前
+            if (lhs.imageFile.lastModified() == rhs.imageFile.lastModified()) {
+                return 0;
+            } else if (lhs.imageFile.lastModified() < rhs.imageFile.lastModified()) {
+                return 1;
             } else {
                 return -1;
             }
