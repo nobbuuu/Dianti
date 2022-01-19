@@ -84,7 +84,11 @@ public class ChoiceTaskListActivity extends BaseActivity {
             ToastUtils.Toast_long("数据异常，请重试");
             return;
         }
-        Observable<Bean<ChoiceTaskListBean>> pwd = WorkModel.getInstance().getPointByType(mTaskInfo.getId(), mTaskInfo.getCategoryType() / 2);
+        int type = mTaskInfo.getCategoryType() / 2;
+        if (mTaskInfo.getCategoryType() == 5) {
+            type = 3;
+        }
+        Observable<Bean<ChoiceTaskListBean>> pwd = WorkModel.getInstance().getPointByType(mTaskInfo.getId(), type);
         showWaitDialog();
         pwd.compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
@@ -114,34 +118,25 @@ public class ChoiceTaskListActivity extends BaseActivity {
     }
 
     private void checkComplete() {
-        if (mTaskInfo.getCategoryType() == 2) {
-            Observable<Bean<EmptyBean>> pwd = WorkModel.getInstance().saveFoodAllInfo(mTaskInfo.getId());
-            showWaitDialog();
-            pwd.compose(this.bindToLifecycle())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new DefaultObserver<Bean<EmptyBean>>() {
-                        @Override
-                        public void onSuccess(Bean<EmptyBean> dataBean) {
-                            Utils.showToast("提交成功");
-                            finish();
-                        }
-
-                        @Override
-                        public void onStop() {
-                            super.onStop();
-                            hideWaitDialog();
-                        }
-                    });
-        } else if (mTaskInfo.getCategoryType() == 4) {
-            Observable<Bean<EmptyBean>> pwd = WorkModel.getInstance().saveDrugAllInfo(mTaskInfo.getId());
-            showWaitDialog();
-            pwd.compose(this.bindToLifecycle())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new DefaultObserver<Bean<EmptyBean>>() {
-                        @Override
-                        public void onSuccess(Bean<EmptyBean> dataBean) {
+        Observable<Bean<EmptyBean>> request = null;
+        switch (mTaskInfo.getCategoryType()) {
+            case 2:
+                request = WorkModel.getInstance().saveFoodAllInfo(mTaskInfo.getId());
+                break;
+            case 4:
+                request = WorkModel.getInstance().saveDrugAllInfo(mTaskInfo.getId());
+                break;
+            case 5:
+                request = WorkModel.getInstance().saveSpecialAllInfo(mTaskInfo.getId());
+                break;
+        }
+        showWaitDialog();
+        request.compose(this.bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DefaultObserver<Bean<EmptyBean>>() {
+                    @Override
+                    public void onSuccess(Bean<EmptyBean> dataBean) {
                            /* String taskUrl = mTaskInfo.getTaskUrl();
                             int otherId = SpUtils.getInt(SpUtilsConstant.otherId);
                             if (!TextUtils.isEmpty(taskUrl)) {
@@ -151,17 +146,16 @@ public class ChoiceTaskListActivity extends BaseActivity {
 
                                 WebDetailsActivity.gotoActivity(mContext, taskUrl);
                             }*/
-                            Utils.showToast("提交成功");
-                            finish();
-                        }
+                        Utils.showToast("提交成功");
+                        finish();
+                    }
 
-                        @Override
-                        public void onStop() {
-                            super.onStop();
-                            hideWaitDialog();
-                        }
-                    });
-        }
+                    @Override
+                    public void onStop() {
+                        super.onStop();
+                        hideWaitDialog();
+                    }
+                });
     }
 
     @OnClick({R.id.task_confirm_btn, R.id.task_confirm_lay})
@@ -170,10 +164,10 @@ public class ChoiceTaskListActivity extends BaseActivity {
             case R.id.task_confirm_btn:
                 int categoryType = mTaskInfo.getCategoryType();
                 int otherId = SpUtils.getInt(SpUtilsConstant.otherId);
-                if (categoryType == 2 || categoryType == 4) {
+                if (categoryType == 2 || categoryType == 4 || categoryType == 5) {
                     if (isDone) {
                         checkComplete();
-                    }else {
+                    } else {
                         ToastUtils.Toast_long("检查要点表未填写");
                     }
                 } else if (categoryType == 1) {

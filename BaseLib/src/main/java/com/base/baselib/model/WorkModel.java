@@ -78,8 +78,8 @@ public class WorkModel {
     /**
      * 获取任务列表
      *
-     * @param taskType      任务类型1是日常监督2是双随机日常监督
-     * @param category_type 任务类别1待办任务2复合任务
+     * @param taskType      任务类型1是日常监督 2是双随机日常监督；3：专项检查
+     * @param category_type 任务类别 1：待办任务 2：复检任务；3：政务；4：未读消息；5：待复检；6：已完成
      * @return
      */
     public Observable<Bean<TaskInfo>> getTaskInfo(String taskType, String category_type, int page) {
@@ -89,17 +89,20 @@ public class WorkModel {
         map.put("pageSize", "" + 5);
         map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
         switch (category_type) {
-            case "1":
-            case "2":
+            case "1"://代办
                 map.put("category_type", category_type);
                 map.put("taskType", taskType);
-                break;
-            case "3":
+                return ApiManager.getInstance().getBaseApi().getTaskDeal(map);
+            case "2"://复检
+                map.put("category_type", category_type);
+                map.put("taskType", taskType);
+                return ApiManager.getInstance().getBaseApi().getTaskRecheck(map);
+            case "3"://政务
                 return ApiManager.getInstance().getBaseApi().getAffairTaskList(map);
-            case "5":
+            case "5"://待复检
                 map.put("fromType", "1");
                 break;
-            default://已完成
+            case "6"://已完成
                 map.put("fromType", "2");
                 break;
         }
@@ -234,11 +237,11 @@ public class WorkModel {
      *
      * @param id        任务ID
      * @param checkData 任务描述
-     * @param xcqzImg 	现场取证图片集合
+     * @param xcqzImg   现场取证图片集合
      * @param xcqzVideo 现场取证视频集合
      * @return
      */
-    public Observable<Bean<EmptyBean>> submitAffairPoint(String id,String checkData,String xcqzImg,String xcqzVideo) {
+    public Observable<Bean<EmptyBean>> submitAffairPoint(String id, String checkData, String xcqzImg, String xcqzVideo) {
         Map<String, Object> map = new HashMap<>();
         map.put(AppConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
         map.put(SpUtilsConstant.otherId, SpUtils.getInt(SpUtilsConstant.otherId));
@@ -250,11 +253,12 @@ public class WorkModel {
     }
 
     /**
-     *收到任务 立即执行
+     * 收到任务 立即执行
+     *
      * @param id
      * @return
      */
-    public Observable<Bean<TaskInfoItem>> confirmAffairsTask(String id,String dataLatitude,String dataLongitude) {
+    public Observable<Bean<TaskInfoItem>> confirmAffairsTask(String id, String dataLatitude, String dataLongitude) {
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
         map.put("dataLatitude", dataLatitude);
@@ -265,7 +269,8 @@ public class WorkModel {
     }
 
     /**
-     *获取已经提交的政务过程列表
+     * 获取已经提交的政务过程列表
+     *
      * @param id
      * @return
      */
@@ -277,7 +282,8 @@ public class WorkModel {
     }
 
     /**
-     *获取评论列表
+     * 获取评论列表
+     *
      * @param id
      * @return
      */
@@ -289,14 +295,15 @@ public class WorkModel {
     }
 
     /**
-     *提交评论
-     * @param id      任务ID
-     * @param content 问题描述
-     * @param replyId 一楼帖子=0，回复别人取上级评论的id
+     * 提交评论
+     *
+     * @param id         任务ID
+     * @param content    问题描述
+     * @param replyId    一楼帖子=0，回复别人取上级评论的id
      * @param contentPic 问题描述图片,多图片用逗号分割
      * @return
      */
-    public Observable<Bean<HistotyBean>> submitAffairComment(String id,String content,String replyId,String contentPic) {
+    public Observable<Bean<HistotyBean>> submitAffairComment(String id, String content, String replyId, String contentPic) {
         Map<String, Object> map = new HashMap<>();
         map.put("taskDistributeId", id);
         map.put("content", content);
@@ -426,6 +433,18 @@ public class WorkModel {
     }
 
     /**
+     * 检查完成（专项）
+     *
+     * @return
+     */
+    public Observable<Bean<EmptyBean>> saveSpecialAllInfo(String id) {
+        Map<String, String> map = new HashMap<>();
+        map.put(SpUtilsConstant.token, SpUtils.getString(SpUtilsConstant.apiKey));
+        map.put("id", id);
+        return ApiManager.getInstance().getBaseApi().saveSpecialAllInfo(map);
+    }
+
+    /**
      * 检查完成（食品）
      *
      * @return
@@ -486,6 +505,7 @@ public class WorkModel {
         map.put("token", "" + SpUtils.getString(SpUtilsConstant.apiKey));
         return ApiManager.getInstance().getBaseApi().getAffairTaskList(map);
     }
+
     /**
      * 获取首页信息返回
      *

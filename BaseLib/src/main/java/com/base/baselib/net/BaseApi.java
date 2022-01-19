@@ -100,16 +100,20 @@ public interface BaseApi {
     Observable<Bean<SignBean>> userAutograph(@FieldMap Map<String, Object> map);
 
     @FormUrlEncoded
-    @POST("/api/mobile/task/getTaskDeal")
-    Observable<Bean<TaskInfo>> getTaskInfo(@FieldMap Map<String, Object> map);
+    @POST("/api/mobile/task/getTaskDeal")//待办任务
+    Observable<Bean<TaskInfo>> getTaskDeal(@FieldMap Map<String, Object> map);
 
     @FormUrlEncoded
-    @POST("/api/mobile/task/getTaskList")//待复检任务
+    @POST("/api/mobile/task/getTaskList")//待复检/已完成任务
     Observable<Bean<TaskInfo>> getTaskList(@FieldMap Map<String, Object> map);
 
     @FormUrlEncoded
-    @POST("/api/mobile/task/getTaskRecheck")
+    @POST("/api/mobile/task/getTaskRecheck")//复检任务
     Observable<Bean<TaskInfo>> getTaskRecheck(@FieldMap Map<String, Object> map);
+
+    @FormUrlEncoded
+    @POST("/api/mobile/affair/getAffairTaskList")
+    Observable<Bean<TaskInfo>> getAffairTaskList(@FieldMap Map<String, Object> map);
 
     @FormUrlEncoded
     @POST("/api/mobile/task/confirmTask")
@@ -186,6 +190,14 @@ public interface BaseApi {
     Observable<Bean<EmptyBean>> saveDrugAllInfo(@FieldMap Map<String, String> map);
 
     /**
+     *检查完成（专项）
+     *
+     */
+    @FormUrlEncoded
+    @POST("/api/mobile/special/saveSpecialAllInfo")
+    Observable<Bean<EmptyBean>> saveSpecialAllInfo(@FieldMap Map<String, String> map);
+
+    /**
      *检查完成（食品）
      *
      */
@@ -205,10 +217,6 @@ public interface BaseApi {
     @FormUrlEncoded
     @POST("user/reporttasklist.html")
     Observable<BeanList<ComplaintTask>> getComplaintList(@FieldMap Map<String, Object> map);
-
-    @FormUrlEncoded
-    @POST("/api/mobile/affair/getAffairTaskList")
-    Observable<Bean<TaskInfo>> getAffairTaskList(@FieldMap Map<String, Object> map);
 
     @FormUrlEncoded
     @POST("/api/mobile/user/getAppMenu")

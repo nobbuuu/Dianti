@@ -96,6 +96,9 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
             case 4://药品任务
                 holder.tasktype_tv.setText("药品任务");
                 break;
+            case 5://专项检查
+                holder.tasktype_tv.setText("专项任务");
+                break;
         }
         if (status == 0) {
             holder.taskstatus_tv.setVisibility(View.GONE);
@@ -155,7 +158,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
                     case 6:
                     case 7:
                     case 8://待执行
-                        if (item.getCategoryType() == 2 || item.getCategoryType() == 4) {//食品、药品任务
+                        if (item.getCategoryType() == 2 || item.getCategoryType() == 4 || item.getCategoryType() == 5) {//食品、药品任务
                             if (item.getQualityType() == 2) {//复检任务
                                 //拼接url
                                 String url = taskUrl + "?token=" + SpUtils.getString(SpUtilsConstant.apiKey) + "&id=" + item.getId() + "&dataId=" + item.getDataId()
@@ -166,7 +169,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.VH> {
                                 ChoiceTaskListActivity.start(mContext, item);
                             }
 
-                        } else if (item.getCategoryType() == 1) {
+                        } else if (item.getCategoryType() == 1) {//特种任务和专项任务
                             if (item.getQualityType() == 1) {
                                 TaskMainActivity.gotoActivity(mContext, item);
                             } else {

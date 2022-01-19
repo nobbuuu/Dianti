@@ -55,4 +55,5 @@ dependencies {
     implementation 'com.teprinciple:updateapputilsX:2.0.2'
     implementation 'com.blankj:utilcodex:1.30.4'
     implementation 'com.ruffian.library:RWidgetHelper-AndroidX:0.0.6'
+    implementation 'com.ruffian.library:RWidgetHelper-AndroidX:0.0.6'
 }

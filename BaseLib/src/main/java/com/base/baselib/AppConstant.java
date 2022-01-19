@@ -6,8 +6,8 @@ package com.base.baselib;
 public class AppConstant {
 
     public static boolean mIsDebug = true;
-    public static String mBasePI = "8.129.55.112:8009";//正式环境
-//    public static String mBasePI = "101.37.86.119:8009";//测试环境
+//    public static String mBasePI = "8.129.55.112:8009";//正式环境
+    public static String mBasePI = "101.37.86.119:8009";//测试环境
     //    public static String mBaseDebugPI = "119.84.8.162:8644";
     public static String mBaseDebugPI = mBasePI;
 

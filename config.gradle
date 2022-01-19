@@ -50,6 +50,8 @@ ext {
 
             //录音
             recorder           : 'com.github.zhaolewei:ZlwAudioRecorder:v1.07',
+            //地图
+            Amap               : 'com.amap.api:3dmap:latest.integration',
             //定位
             location           : 'com.amap.api:location:latest.integration',
             //图片预览

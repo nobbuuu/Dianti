@@ -26,7 +26,7 @@ import androidx.viewpager.widget.ViewPager;
  * 2 专项检查
  */
 public class TaskListActivity extends BaseActivity {
-    private String[] mTitles = new String[]{"日常监管", "双随机监管"};
+    private String[] mTitles = new String[]{"日常监管", "双随机监管","专项检查"};
     private ArrayList<TaskListFragment> mFragments = new ArrayList<>();
     public String category_type = "1";
 

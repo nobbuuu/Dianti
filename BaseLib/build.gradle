@@ -68,6 +68,8 @@ dependencies {
     //录音
     api rootProject.ext.deps.recorder
 
+    //地图
+    api rootProject.ext.deps.Amap
     //定位
     api rootProject.ext.deps.location
     //图片预览
